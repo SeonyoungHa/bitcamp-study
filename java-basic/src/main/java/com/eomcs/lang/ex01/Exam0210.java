@@ -1,4 +1,3 @@
 package com.eomcs.lang.ex01;
 
-class Exam0110 {
-   }
+class Exam2_1x {}
