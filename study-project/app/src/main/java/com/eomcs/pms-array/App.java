@@ -2,16 +2,28 @@ package com.eomcs.pms;
 
 import java.util.Scanner;
 
-//1) 변경 준비 
+//1) 변경 준비
 //2) 사용자에게 명령 프롬프트 출력
+//3) 사용자의 명령을 입력 받아 출력
+//4) 명령어 입력 받아 출력하는 것을 무한 반복 
+
+
 public class App {
 
   public static void main(String[] args) {
-    System.out.println("명령> ");
-    /*
-    System.out.println("[회원]");
+	Scanner keyboardScan = new Scanner(System.in);
 
-    Scanner keyboardScan = new Scanner(System.in);
+	while (true) {
+	System.out.print("명령> ");
+	
+	String input = keyboardScan.nextLine();
+	
+	if (input.equals("exit") || input.equals("quit"))
+	System.out.println(input);
+	}
+	
+    /*System.out.println("[회원]");
+
 
     // 최대 입력 개수
     final int LENGTH = 100;
@@ -67,6 +79,7 @@ public class App {
       System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           no[i], name[i], email[i], tel[i], registeredDate[i]);
     }
-     */
+    */
+	keyboardScan.close();
   }
 }
