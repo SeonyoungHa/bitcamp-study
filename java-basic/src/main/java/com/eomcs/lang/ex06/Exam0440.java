@@ -5,7 +5,7 @@ package com.eomcs.lang.ex06;
 public class Exam0440 {
   public static void main(String[] args) {
 
-    //    String[] names = new String[5]; 
+    String[] names = new String[5]; 
     //    names[0] = "홍길동"; 
     //    names[1] = "임꺽정"; 
     //    names[2] = "유관순";
