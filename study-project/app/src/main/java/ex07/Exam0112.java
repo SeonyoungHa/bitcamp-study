@@ -1,10 +1,11 @@
-package com.eomcs.lang.ex07;
+package ex07;
 
 import java.util.Scanner;
 
 // # 메서드 : 사용 전
 // 1단계: 공백 출력 코드를 메서드로 추출하기
-public class Exam0110 {
+// 2단계: 별을 출력하는 코드를 메서드로 추출하
+public class Exam0112 {
 	
 	static void printSpaces(int len) {
 		int spaceCnt = 1;
@@ -12,6 +13,14 @@ public class Exam0110 {
 			System.out.print(" ");
 			spaceCnt++;
 		}
+	}
+	
+	static void printStars(int len) {
+	      int starCnt = 1;
+	      while (starCnt <= len) {
+	        System.out.print("*");
+	        starCnt++;
+	      }
 	}
 	
   public static void main(String[] args) {
@@ -22,15 +31,11 @@ public class Exam0110 {
 
     int starLen = 1;
     while (starLen <= len) {
-      printSpaces((len - starLen) / 2)s;
+      printSpaces((len - starLen) / 2);
 
-      // 별 출력
-      int starCnt = 1;
-      while (starCnt <= starLen) {
-        System.out.print("*");
-        starCnt++;
-      }
-
+      //별 출력
+      printStars(starLen);
+      
       // 출력 줄 바꾸기
       System.out.println();
       starLen += 2;
