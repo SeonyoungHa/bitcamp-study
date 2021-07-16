@@ -17,8 +17,12 @@ public class ShirtTest {
 
     System.out.print(t1.getShirt());
     t1.discount(100.9);
+    System.out.println();
+    
     System.out.print(t2.getShirt());
     t1.discount(40.9);
+    System.out.println();
+
     System.out.print(t3.getShirt());
     t1.discount(70.9);
     // System.out.print(",");
