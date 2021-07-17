@@ -22,7 +22,7 @@ public class MemberHandler {
     member.no = Prompt.inputInt("번호? ");
     member.name = Prompt.inputString("이름? ");
     member.email = Prompt.inputString("이메일? ");
-    member.password =Prompt.inputString("암호? ");
+    member.password = Prompt.inputString("암호? ");
     member.photo = Prompt.inputString("사진? ");
     member.tel = Prompt.inputString("전화? ");
     member.registeredDate = new Date(System.currentTimeMillis());
