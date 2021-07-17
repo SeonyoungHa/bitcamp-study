@@ -9,7 +9,8 @@ public class Prompt {
 
   public static String inputString(String title) {
     System.out.print(title);
-    return keyboardScan.nextLine();
+    String k = keyboardScan.nextLine();
+    return k;
   }
 
   public static int inputInt(String title) {
