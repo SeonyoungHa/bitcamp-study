@@ -1,7 +1,7 @@
 package com.eomcs.pms.handler;
 
 import com.eomcs.pms.domain.Project;
-import com.eomcs.util.Prompt;
+import com.eomcs.pms.util.Prompt;
 
 public class ProjectHandler {
 
@@ -9,7 +9,6 @@ public class ProjectHandler {
   static Project[] projects = new Project[MAX_LENGTH];
   static int size = 0;
 
-  //다른 패키지에 있는 App클래스가 다음 메서드를 호출할 수 잇도록 공개한다.
   public static void add() {
     System.out.println("[프로젝트 등록]");
 
@@ -29,7 +28,8 @@ public class ProjectHandler {
   public static void list() {
     System.out.println("[프로젝트 목록]");
     for (int i = 0; i < size; i++) {
-      System.out.printf("%d, %s, %s, %s, %s\n",
+      // 번호, 프로젝트명, 시작일, 종료일, 만든이
+      System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           projects[i].no, 
           projects[i].title, 
           projects[i].startDate, 
@@ -37,4 +37,5 @@ public class ProjectHandler {
           projects[i].owner);
     }
   }
+
 }

@@ -1,7 +1,7 @@
 package com.eomcs.pms.handler;
 
 import com.eomcs.pms.domain.Task;
-import com.eomcs.util.Prompt;
+import com.eomcs.pms.util.Prompt;
 
 public class TaskHandler {
 
@@ -9,7 +9,6 @@ public class TaskHandler {
   static Task[] tasks = new Task[MAX_LENGTH];
   static int size = 0;
 
-  //다른 패키지에 있는 App클래스가 다음 메서드를 호출할 수 잇도록 공개한다.
   public static void add() {
     System.out.println("[작업 등록]");
 
@@ -29,7 +28,6 @@ public class TaskHandler {
     tasks[size++] = task;
   }
 
-  //다른 패키지에 있는 App클래스가 다음 메서드를 호출할 수 잇도록 공개한다.
   public static void list() {
     System.out.println("[작업 목록]");
 
@@ -45,8 +43,8 @@ public class TaskHandler {
         default:
           stateLabel = "신규";
       }
-
-      System.out.printf("%d, %s, %s, %s, %s\n",
+      // 번호, 작업명, 마감일, 프로젝트, 상태, 담당자
+      System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           tasks[i].no, 
           tasks[i].content, 
           tasks[i].deadline, 
