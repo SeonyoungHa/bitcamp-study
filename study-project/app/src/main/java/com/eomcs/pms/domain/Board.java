@@ -11,4 +11,5 @@ public class Board {
   public Date startDate;
   public Date registeredDate;
   public String viewCount;
+  public int like;
 }
