@@ -19,7 +19,19 @@ public class ProjectHandler {
     project.content = Prompt.inputString("내용? ");
     project.startDate = Prompt.inputDate("시작일? ");
     project.endDate = Prompt.inputDate("종료일? ");
-    project.owner = Prompt.inputString("만든이? ");
+
+    while (true) {
+      String owner = Prompt.inputString("만든이? (취소: 빈 문다열)");
+      if (MemberHandler.exist(owner)) {
+        project.owner = owner;
+        break;
+      } else if (owner.length() == 0) {
+        System.out.println("프로젝트 등록을 취소합니다.");
+        return; //메서드 실행을 즉시 종료!
+      }
+      System.out.println("등록된 회원이 아닙니다.");
+    } 
+
     project.members = Prompt.inputString("팀원? ");
 
     projects[size++] = project;
