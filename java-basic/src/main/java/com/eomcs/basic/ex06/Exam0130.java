@@ -1,4 +1,4 @@
-package com.eomcs.lang.ex06;
+package com.eomcs.basic.ex06;
 
 //# 흐름 제어문 - if 문의 조건
 //
@@ -22,7 +22,7 @@ public class Exam0130 {
     // 다음은 a 변수에 100을 넣는다.
     // 그런데 a가 boolean이 아니기 때문에 컴파일 오류가 발생한다.
     //if (a = 100) System.out.println("6666"); // 컴파일 오류! 
-    
+
     boolean b;
     if (b = true) System.out.println("된다!");
   }

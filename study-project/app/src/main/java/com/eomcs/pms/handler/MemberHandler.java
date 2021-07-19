@@ -44,7 +44,7 @@ public class MemberHandler {
     }
   }
 
-  static boolean exist(String name) {
+  static boolean exist (String name) {
     for (int i = 0; i < size; i++) {
       if (members[i].name.equals(name)) {
         return true;
@@ -52,12 +52,4 @@ public class MemberHandler {
     }
     return false;
   }
-
 }
-
-
-
-
-
-
-

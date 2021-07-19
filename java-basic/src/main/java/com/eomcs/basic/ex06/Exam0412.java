@@ -1,4 +1,4 @@
-package com.eomcs.lang.ex06;
+package com.eomcs.basic.ex06;
 
 //# 흐름 제어문 - for 반복문
 //
@@ -13,7 +13,7 @@ public class Exam0412 {
       System.out.println(i);
       i++;
     }
-    
+
     // for 문을 종료한 후에도 i 변수를 사용할 수 있다.
     //System.out.println(i);
   }
