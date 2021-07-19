@@ -32,7 +32,19 @@ public class ProjectHandler {
       System.out.println("등록된 회원이 아닙니다.");
     } 
 
-    project.members = Prompt.inputString("팀원? ");
+    String members = "";
+    while (true) {
+      String member = Prompt.inputString("팀원?(완료: 빈 분자열) ");
+      if (MemberHandler.exist(member)) {
+        if (members.length() > 0) {
+          members += ",";
+        }
+        members += "," + member;
+        continue;
+      } else if (member.length() == 0) {
+        break;
+      } System.out.println("등록된 회원이 아닙니다.");
+    }
 
     projects[size++] = project;
   }
@@ -41,12 +53,13 @@ public class ProjectHandler {
     System.out.println("[프로젝트 목록]");
     for (int i = 0; i < size; i++) {
       // 번호, 프로젝트명, 시작일, 종료일, 만든이
-      System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+      System.out.printf("%d, %s, %s, %s, [%s]\n", // 출력 형식 지정
           projects[i].no, 
           projects[i].title, 
           projects[i].startDate, 
           projects[i].endDate, 
-          projects[i].owner);
+          projects[i].owner,
+          projects[i].members);
     }
   }
 
