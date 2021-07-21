@@ -1,0 +1,320 @@
+<1> 2021-06-28 (월)
+
+
+*Software     -----> System S/W => H/W 제어
+                          Os, 드라이버 등   H/W) 컴퓨터, 프린터, 스캐너, 마우스, 키보드, VGA카드 등 
+
+                  -----> Application S/W
+                          Photoshop, MS-office, HNP, 게임, 카카오톡 등
+
+*Application S/W
+
+                   -----> Standalone => PC설치형 = Desktop App.
+                  |          Photoshop, HWP, Excel, 계산기, 그림판 등
+                  |
+  Application -------> Client/Server => PC에 설치 + 원격컴퓨터에 설치
+                  |                                  client          server
+                  |           카카오톡, LOL게임, Spotify, Skype, WebEx(화상회의) 등
+                  |
+                    -----> Web Application => web browser + webserver
+                                                          client(PC)       원격컴퓨터
+                             네이버메일, Netflix, MS-Office365, 지도 등
+                             (업무 시스템)
+
+*Web Application
+
+           PC                                             Server                               
+   [Web Browser]     -----작업요청----->    [Web Server]    -----실행----->    [APP]]]     <-----개발----- 나
+                           <----- 결과 -----                            <-----결과-----   Application Server
+            ^
+        화면출력
+        입력받기
+
+           나                                                 나
+Chrome, Edge, Safari, Firefox                 Apache, Ngin X ...                    Tomcat, Resin, Jetly, JEUS, WebLogic, 
+                                                                                              WebSphere, JBoss, Geronemo, Glass Fish
+
+*Web Application 구성요소
+
+Back-end     [Web Server]    -----실행-----> [Java App] -출력할 데이터를 가공
+                                                                         - 입력한 데이터를 저장/조회/변경/삭제
+     v                                                                  - 사용자 인증 (Authentication) : 로그인
+                                                               +        - 사용자 권한 (Authorization) : 관리자, 일반, 손님
+Full Stack   <= SI/SM                                                     
+     ^
+Front-end     [Web Browser]   -----실행-----> [HTML] - 화면구성 <- Java App.에서 준비한 데이터를 가지고
+                                                               +
+                                        -----실행-----> [CSS] - 화면의 모양(색상, 크기, 위치 등) 제어
+                                                               +
+                                        -----실행-----> [JavaScript]
+
+
+
+<3> 2021.06.30 (수)
+
+인터프리터 = 엔진(engine) = (player) = (runtime) = VM(Virtual Machine)
+컴파일 속도빠름,       다른 운영체제에서 사용하려면 다시 컴파일 해야함
+인터프리터 속도느림,  다른 운영체제용 인터프리터가 설치돼있으면 사용 가능
+
+
+개발자 ----작성---> [명령문] ---------> [Bytecode] ------
+
+p.29
+"Write once, Run anywhere" = Java catchphrase. 
+컴파일 방식                  +              인터프리터 방식 = Hybrid 방식 (혼합방식)
+-문법검사 완료
+-실행에 유리한 단축형태의 
+  명령어인 bytecode로 변환    -----------------------> 인터프리터가 실행할 때 소스를 직접읽는 것 보다 실행 속도 빠르다
+
+
+*자바 11버전 사용하기 (Longtermservices)
+
+환경 변수
+대문자로 적기(윈도우만 소문자도 ok, 리눅스 맥 )
+설정 후 폴더 위치 지정 
+명령창에 echo %JAVA_HOME% (window환경변수는%->;로 구분, mac환경변수는\->,로 구분)
+javac -> 실행 불가능 위치 지정 전
+p11 JDK 실행파일이 있는 디렉토리 경로를 'PATH'라는 환경 변수에 추가
+
+git clone url = url 경로로가서 모든 파일 가져옴
+javac --version = java compile version보여줌
+
+p30
+*java 컴파일과 실행
+
+Hello.java   ----compile---> Hello.class   -----실행----> JVM
+              $javac 소스파일명
+              $javac Hello.java
+              $javac -encoding utf-8 Hello.java
+                -> 소스파일에 한글이 있다
+                     -> 저장할때 utf-8 규칙에 따라 한글을 저장하는 경우
+
+16비트 pin16 개
+아스키코드 7bit 7개pin
+CPU 는 pin 16개
+
+del *.exe = .exe  file다 지우라는 뜻
+
+* compile 방식 vs interpreter 방식 vs Hybrid
+
+Java Application Software
+project (기본) 관리 단위
+(관리단위는 시작과 끝이 명확.) 
+
+큰 크기의 application을 개발할때는 여러 개의 프로젝트로 관리한다.
+프로젝트ㅡ 사이에 의존관계가 존재할 수 있다.
+
+
+
+
+
+
+
+* 애플리케이션과 프로젝터 
+예)
+
+*,자바 애플리케이션 프로젝트
+
+
+* 자바 어플리케이션을 프로젝트로 관리
+1> 1단계
+git repo. = Project 관리 폴더
+/bitcamp-study
+
+2> 2단계 
+소스파일과 bytecode가 들어있음 .class파일을 분리 
+/bitcamp-study <- git repo. = project폴더
+    src/ <- 자바소스파일
+    bin/ <- .class파일
+
+
+값 (숫자, 문자, 소리, 빛)
+ |          encode(특정규칙에 따라 코드화)
+ v
+code : 값을 컴퓨터에 저장할때 어떤 전기적 신호(5V, 0V)를 사용하는지
+         2진수로 표현 (1, 0)
+         16진수 (0xF7)
+
+이클립스는 컴파일러가 아니라 에디터일 뿐
+
+bitcamp-study$javac -d bin -encoding utf-8 src/Hello.java
+
+bitcamp-study$java -classpath bin Hello 
+                           .class파일이 들어있는 폴더 위치
+                                             클래스명만 적기
+bitcamp-study$java -cp bin Hello 
+
+bitcamp-study$java bin/Hello 소스파일만 찾을 수 있음
+                                       폴더이름 지정 불가
+
+javac -d bin/main -encoding utf-8 src/main/java/Hello.java
+java -cp bin/main Hello
+
+p37
+3> 3단계
+    프로젝트가 커짐에 따라 애플리케이션의 기능이 복잡해지고 규모가 커짐에 따라
+    프로그래밍 소스외에 다른 파일들도 필요하게 되었다.
+                              ------------
+                           - 설정파일(.xml, .properties)
+                           - 특정 개발도구에서 사용하는 파일
+                           - 단위테스트 관련 소스 및 설정파일
+bitcamp-study/
+          -src/
+               -main/                application 소스
+                   -java/             자바소스
+                   -resources/      일반파일
+               -test/                 단위테스트 관련파일               => Maven 프로젝트 표준 디렉토리 구조
+                   -java/             자바소스                                   ㄴbuild
+                   -resources/      일반파일
+          -bin
+               -main                 클래스파일
+
+
+컴파일 $javac -d bin/main src/main/java/Hello.java
+
+실행 $java -cp bin/main Hello
+
+
+4> 4단계
+    ㄴ애플리케이션의 규모가 커지면 단일 프로젝트로 관리하기 힘들다
+    ㄴ그래서 한 저장소에 여러 프로젝트를 둘 수 있도록 구조를 변경한다
+
+    bitcamp-study/                         git 저장소
+              java-basic/                     프로젝트 폴더
+                     src/
+                         main/
+                               java/
+                               resources/
+                         test/
+                               java/
+                               resources/
+                         bin/
+                               main/
+
+	*실무의 프로젝트는 3단계, 4단계 두가지 경우 모두 있음
+             1) repo.=project
+             2) repo. 
+                  ㄴproject1
+                  ㄴproject2
+
+!! 폴더가 비어있으면 백업 불가!!
+
+프로젝트 산출물 공유를 위한 폴더 생성
+
+0718
+*04-d 클래스 사용법 - 의존관계
+[04-c : 의존관계]
+App 은 아래 클래스의 메서드를 호출, 사용함
+MemberHandler ->Prompt 사용 Member 클래스 사용
+ProjectHandler -->Prompt 사용  Project 클래스 사용
+TaskHandler ----->Prompt 사용  Task클래스 사용
+=>Prompt 의존객체 dependency
+
+*App이나 oooHandler 클래스는 Prompt를 사용한다. =prompt없이는 동작불가능
+                                                    =의존한다. 
+
+ex) 변민성님 그거 좀 주세요. 그거 = 물통
+그거 (상황에 따라 요구하는게 다름) = 거시기 = object(목적보다는 '것'의 의미)
+object (객체)
+객체 = 인스턴스는 잘못된 해석 
+
+04-c Handler끼리는 서로 의존하지 않음
+04-d Handler끼리의 의존관계를 엮어봄
+
+
+add(), list() 
+
+		        call
+	클래스	------------------->   클래스
+            client                use               supplier
+
+            ex) App   -----------------------> MemberHandler
+                               의존관계              dependency
+
+Member[] members = new Member[10];
+
+*Information Expert 설계 패턴 (GRASP)
+ProjectHandler 가 아나리 변수를 갖고 잇는 MemberHandler에서 변수를 만들어야함 있어야함
+
+*05-a :인스턴스 사용법: 클래스 필드와 클래스 메서드의 한계
+
+app -->   MemberHandler
+	ProjectHandler
+	TaskHandler
+	BoardHandler         boards : board[]
+			size : int
+
+* 클래스를 복제하여 기능을 추가하기
+* 클래스를 복제하여 기능을 추가하는 방식의 문제점
+class가 있을때 class를 복제
+-문제1) 버그가 있을시 , 복제한 모든 클래스에 복제됨 > 복제클래스 모두 변경해야함
+	ㄴ유지보수가 어렵다.
+-문제2) 기능 추가,변경 하면, 모든 복제 클래스를 변경해야한다.
+	ㄴ 유지보수가 힘들다.
+
+*05-b 인스턴스 필드가 필요한 이유와 사용법
+
+
+class BoardHandler{
+	static final int MAX_LENGTH = 5;
+	static Board[] boards = new Board[MAX_LENGTH];
+	static int size;
+	...
+  }
+위의 3개의 field는 static field(변수)임 = 클래스 변수(필드)
+ => .class파일이 'Method Area' 영역에 로딩될 때 생성된다.
+ => 클래스 당 한번만 생성된다.
+ => 여러 개의 게시판을 다룰 수 없다. => 해결책 : static field 를 instance field 로 전환시킴
+				ㄴnew명령으로 필요할때 마다 생성할 수 있음
+
+밑과 같이 인스턴스 필드로 전환한다.
+class BoardHandler{
+	static final int MAX_LENGTH = 5; (모든 게시판의 배열 개수가 같기 때문에, 이 변수는 여러개를 만들 필요가 없다.)
+	Board[] boards = new Board[MAX_LENGTH]; (게시판 마다 다로 생성해야하는 변수만 인스턴스 필드로 전환)
+	int size; (인스턴스 필드로 전환)
+	...
+  }
+
+class BoardHandler{
+	static final int MAX_LENGTH = 5;
+	static Board[] boards = new Board[MAX_LENGTH];
+	static int size;
+	
+	static void add() {
+	   ...
+	   boards[size++] = board;
+	}
+	static void list() {
+	   ...
+	   boads[size++] = board;
+	}
+  }
+  |
+  v
+
+class BoardHandler{
+	static final int MAX_LENGTH = 5;
+	static Board[] boards = new Board[MAX_LENGTH];
+	static int size;
+	
+	static void add(BoardHandler that) {
+	   ...
+	   that.boards[size++] = board;
+	}
+	static void list(BoardHandler that) {
+	   ...
+	   for(int i=0; i<that.size; i++)
+  }
+static 메서드는 static변수를 직접 접근하여 사용할 수 있다.
+
+BoardHandler boardHandler = new BoardHandler();
+Heap이 static이 안붙은 변수를 무조건 만듬
+ ㄴ boards; size;
+
+
+
+게시판 마다 별도의 클래스를 ->기능 변경, 추가, 삭제가 쉽다
+
+
+
+
