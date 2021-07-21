@@ -42,14 +42,6 @@ public class BoardHandler {
           this.boards[i].like);
     }
   }
-
-  public void detail() {
-    System.out.println("[게시글 상세보기]");
-
-    int no = Prompt.inputInt("번호?");
-
-
-  }
 }
 
 
