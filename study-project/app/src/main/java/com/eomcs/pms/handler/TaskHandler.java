@@ -75,7 +75,7 @@ public class TaskHandler {
 		Task task = null;
 		int taskIndex = -1;
 
-		// Board 인스턴스가 들어있는 배열을 뒤져서
+		// Task 인스턴스가 들어있는 배열을 뒤져서
 		// 게시글 번호와 일치하는 Board인스턴스를 찾는다.
 
 		for (int i = 0; i < this.size; i++) {
