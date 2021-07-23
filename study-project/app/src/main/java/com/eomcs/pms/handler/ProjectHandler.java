@@ -28,21 +28,7 @@ public class ProjectHandler {
       return;
     }
 
-    String members = "";
-    while (true) {
-      String member = Prompt.inputString("팀원?(완료: 빈 문자열) ");
-      if (memberHandler.exist(member)) {
-        if (members.length() > 0) {
-          members += ",";
-        }
-        members += member;
-        continue;
-      } else if (member.length() == 0) {
-        break;
-      } 
-      System.out.println("등록된 회원이 아닙니다.");
-    }
-    project.members = members;
+    project.members = promptMembers(memberHandler, null);
 
     this.projects[this.size++] = project;
   }
@@ -102,23 +88,7 @@ public class ProjectHandler {
       return; // 메서드 실행을 즉시 종료!
     }
 
-
-    String members = "";
-    while (true) {
-      String member = Prompt.inputString(String.format(
-          "팀원(%s)?(완료: 빈 문자열) ", project.members));
-      if (memberHandler.exist(member)) {
-        if (members.length() > 0) {
-          members += ",";
-        }
-        members += member;
-        continue;
-      } else if (member.length() == 0) {
-        break;
-      } 
-      System.out.println("등록된 회원이 아닙니다.");
-    }
-
+    String members = promptMembers(memberHandler, project.members);
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -181,7 +151,7 @@ public class ProjectHandler {
   private String promptOwner(MemberHandler memberHandler, String ownerName) {
     while (true) {
       String owner = Prompt.inputString(String.format
-          ("만든이?(취소: 빈 문자열) ", ownerName != null ? "(" + ownerName + ")" : ""));
+          ("만든이%s?(취소: 빈 문자열) ", ownerName != null ? "(" + ownerName + ")" : ""));
       if (memberHandler.exist(owner)) {
         return owner;
       } else if (owner.length() == 0) {
@@ -191,5 +161,23 @@ public class ProjectHandler {
     }
   }
 
+  private String promptMembers(MemberHandler memberHandler, String oldMembers) {
+    String members = "";
+    while (true) {
+      String member = Prompt.inputString(String.format
+          ("팀원%s?(완료: 빈 문자열) ", oldMembers != null ? "(" + oldMembers + ")" : ""));
+      if (memberHandler.exist(member)) {
+        if (members.length() > 0) {
+          members += ",";
+        }
+        members += member;
+        continue;
+      } else if (member.length() == 0) {
+        break;
+      } 
+      System.out.println("등록된 회원이 아닙니다.");
+    }
+    return members;
+  }
 
 }
