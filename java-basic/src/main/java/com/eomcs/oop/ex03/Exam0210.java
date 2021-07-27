@@ -4,7 +4,7 @@ package com.eomcs.oop.ex03;
 
 public class Exam0210 {
   static class A {
-    //1) 클래스 메서드 
+    //1) 클래스 메서드 = static메서드
     //   => static 붙은 메서드이다.
     //   => 클래스 이름으로 호출할 수 있다.
     //   => "스태틱 메서드"라고도 부른다.
