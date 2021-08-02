@@ -52,7 +52,7 @@ class Car {
   }
 }
 
-public class Exam0220{
+public class Exam0222{
 
   public static void main(String[] args) {
 
