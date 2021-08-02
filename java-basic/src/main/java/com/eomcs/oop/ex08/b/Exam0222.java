@@ -20,8 +20,12 @@ class CarFactory {
   // - 이런 설계 기법을 "singleone" 패턴이라 부룬다.
   //
 
+  static CarFactory factory = null;
   public static CarFactory getInstance() {
-    return new CarFactory();
+    if (factory == null) {
+      factory = new CarFactory();
+    }
+    return factory;
   }
 
   // 다음은 CarFactory를 통해 자동차를 생성할 때 호출할 메서드이다.
