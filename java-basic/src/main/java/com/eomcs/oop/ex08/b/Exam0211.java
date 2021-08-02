@@ -1,7 +1,8 @@
-// 캡슐화(encapsulation) - 접근 범위 테스트
+// 캡슐화(encapsulation) - 같은 패키지의 멤버가 접근할 수 있는 범위
 package com.eomcs.oop.ex08.b;
 
-public class Exam0210 extends com.eomcs.oop.ex08.b.sub.C {
+
+public class Exam0211 extends com.eomcs.oop.ex08.b.sub.C {
 
   public static void main(String[] args) {
     A obj1 = new A();
@@ -29,7 +30,7 @@ public class Exam0210 extends com.eomcs.oop.ex08.b.sub.C {
     // 이유 => 자기의 인스턴스 변수가 아니다.
     obj3.publicVar = 100; // OK! 모두 다 접근 가능.
 
-    Exam0210 obj4 = new Exam0210();
+    Exam0211 obj4 = new Exam0211();
     //obj4.privateVar = 100; // 접근 불가! C 클래스에서만 접근 가능
     //obj4.defaultVar = 100; // 접근 불가! C 클래스와 같은 패키지가 아니다.
     obj4.protectedVar = 100; // OK! Exam0210은 C의 자식 클래스이며,
@@ -44,7 +45,7 @@ public class Exam0210 extends com.eomcs.oop.ex08.b.sub.C {
     obj.publicVar = 100;
   }
 
-  void m2(Exam0210 obj) {
+  void m2(Exam0211 obj) {
     //obj.privateVar = 100;
     //obj.defaultVar = 100;
     obj.protectedVar = 100;
