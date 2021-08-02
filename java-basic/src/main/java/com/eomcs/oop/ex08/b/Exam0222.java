@@ -1,33 +1,33 @@
-// 캡슐화(encapsulation) 응용 - 생성자를 private 으로 막기
+// 캡슐화(encapsulation) 응용 - 생성자를 private 으로 막기 2
 package com.eomcs.oop.ex08.b;
 
-class Car {
+
+class Car2 {
   String model;
   String maker;
   int cc;
   int valve;
+}
+
+class CarFactory {
 
   // 생성자를 private으로 선언하면 외부에서 이 클래스의 인스턴스를 생성하는 것을 막을 수 있다.
-  private Car() {}
+  private CarFactory() {}
 
-  // 인스턴스 생성과정이 복잡할 경우에 직접 인스턴스를 생성하기 보다는
-  // 인스턴스를 생성해주는 메서드를 사용하여 인스턴스를 만드는 것이 
-  // 유지보수할 떼 편하다. 
-  // => singletone 패턴에서 getInstance() 메서드는 오직 한 개의 인스턴스만 생성한다.
-  //    즉 메서드의 목적은 단지 인스턴스를 한 개만 만들어 사용하기 위함이다.
-  // => 그러나 다음 create() 메서드는 호출할 때 마다 인스턴스를 만들어 주기 때문에
-  //    singleton 하고 구조가 비슷하지만 singleton 은 아니다.
-  //    이 메서드의 목적은 복잡한 인스턴스 생성을 대신 해주는 것이다.
+  // 예2) 인스턴스를 오직 한개만 생성해야 할 경우 
+  // - 인스턴스를 여러개 생성할 필요가 없는 경우에 생성자를 private 으로 막는다.
+  // - getInstance() 같은 스태틱 메서드를 통해 인스턴스를 한개만 만들어 사용한다.
+  // - 이런 설계 기법을 "singleone" 패턴이라 부룬다.
   //
-  // 다시! 언제 이런 방식으로 설계하는가?
-  // => 인스턴스 생성과정이 복잡할 경우에 이용하는 방법이다.
-  // => 즉 인스턴스를 생성해 주는 메서드를 통해
-  //    인스턴스를 생성하면 인스턴스를 사용하고픈 개발자는 코드가 간결해진다
-  // 이런 설계 방식에 대해 이름을 붙였으니 그 이름도 유명한 "factory method" 설계 패턴이다.
-  //
-  public static Car create(String name) {
 
-    Car c = new Car(); // private은 클래스 안에서 사용할 수 있다.
+  public static CarFactory getInstance() {
+    return new CarFactory();
+  }
+
+  // 다음은 CarFactory를 통해 자동차를 생성할 때 호출할 메서드이다.
+  public Car2 create(String name) {
+
+    Car2 c = new Car2();
 
     switch (name) {
       case "티코":
@@ -56,18 +56,29 @@ public class Exam0222{
 
   public static void main(String[] args) {
 
-    //    Car c1 = new Car(); // 컴파일 오류!
-    // 생성자가 private이기 때문에 다른 클래스에서 호출할 수 없다.
-    // 따라서 인스턴스를 생성할 수 없다.
-    //
-    // 그럼 왜 생성자를 private으로 만들었는가?
-    // => 개발자가 직접 인스턴스를 생성하면 너무 복잡하니,
-    //    다른 메서드를 통해 인스턴스를 생성하라는 의미다!
-    //
-    Car c2 = Car.create("티코");
+    // 자동차 공장 객체를 먼저 만든다.
+    // CarFactory factory = new CarFactory(); // 컴파일 오류! 왜? 생성자가 private 이다.
+
+    // 생성자가 private 일 경우 보통 스태틱 매서드를 통해 인스턴스를 생성한다.
+    CarFactory factory = CarFactory.getInstance();
+
+    Car2 c = factory.create("티코");
 
     System.out.printf("%s,%s,%d,%d\n",
-        c2.model, c2.maker, c2.cc, c2.valve);
+        c.model, c.maker, c.cc, c.valve);
+
+    // Exam0211이나 
+    // Car c2 = Car.creat("티코");
+    //
+    // Exam0222의 경우처럼
+    //  예) CarFactory factory = CarFactory.getInstance();
+    //
+    // 생성자가 private 접근으로 막혀 있어 
+    // new 연산자를 이용하지 않고 스태틱 메서드를 호출해서 인스턴스를 생성하는 경우
+    // 다음 둘 중 하나다!
+    // 1) 인스턴스 생성 과정이 복잡한 경우 (Exam0221)
+    // 2) 인스턴스를 한개만 생성해야 하는 경우 (Exam0222)
+    //
 
   }
 }
