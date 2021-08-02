@@ -1,8 +1,6 @@
 // 캡슐화(encapsulation) 응용 - 생성자를 private 으로 막기
 package com.eomcs.oop.ex08.b;
 
-import com.eomcs.oop.ex08.b.sub.C;
-
 class Car {
   String model;
   String maker;

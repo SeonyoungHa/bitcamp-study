@@ -2,68 +2,48 @@
 package com.eomcs.oop.ex08.b;
 
 class A {
-	private int privateVar;
-	int defaultVar;
-	protected int protectedVar;
-	public int publicVar;
+  private int privateVar;
+  int defaultVar;
+  protected int protectedVar;
+  public int publicVar;
 }
 
-public class Exam0215 extends com.eomcs.oop.ex08.b.sub.C {
+public class Exam0215 extends com.eomcs.oop.ex08.b.sub.Y {
 
-	public static void main(String[] args) {
-		A obj1 = new A();
+  public static void main(String[] args) {
+    m1(new X());
+    m2(new com.eomcs.oop.ex08.b.sub.Y());
+    m3(new Exam0215 ());
 
-		//obj1.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용가능.
-		obj1.defaultVar = 100; // OK! 이 클래스는 A 클래스와 같은 패키지에 소속되어 있다.
-		obj1.protectedVar = 100; // OK! 비록 이 클래스가 자식클래스는 아니지만
-		// 같은 패키지에 소속되어 있다.
-		obj1.publicVar = 100; // OK! 모두 다 접근 가능!
+  }
 
-		com.eomcs.oop.ex08.b.sub.B obj2 = new com.eomcs.oop.ex08.b.sub.B();
+  // 같은 패키지의 객체를 파라미터로 받은 경우
+  static void m1(X obj) {
+    //  obj.privateVar = 100; // 접근 불가
+    obj.defaultVar = 100; // OK!! 같은 패키지 
+    obj.protectedVar = 100; // OK!! 같은 패키지
+    obj.publicVar = 100; // OK!! 모두 접근 가능
+  }
 
-		//    obj2.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용 가능.
-		//obj2.defaultVar = 100; // 접근 불가! 같은 패키지까지만 접근 가능.
-		//obj2.protectedVar = 100; // 접근 불가! 같은 패키지 또는 자식 클래스 접근 가능
-		obj2.publicVar = 100; // OK! 모두 다 접근 가능.
+  // 다른 패키지의 객체를 파라미터로 받은 경우
+  static void m2(com.eomcs.oop.ex08.b.sub.Y obj) {
+    //  obj.privateVar = 100; // 접근 불가!
+    //  obj.defaultVar = 100; // 접근 불가!
+    //  obj.protectedVar = 100; // 접근 불가! Exam0215가 상속 받아 만든 변수가 아니다.
+    obj.publicVar = 100; // OK!! 모두 접근 가능
+  }
 
-
-		com.eomcs.oop.ex08.b.sub.C obj3 = new com.eomcs.oop.ex08.b.sub.C();
-
-		//obj3.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용 가능.
-		//obj3.defaultVar = 100; // 접근 불가! 같은 패키지까지만 접근 가능.
-		//obj3.protectedVar = 100; // 접근 불가! 같은 패키지 또는 자식 클래스 접근 가능
-		// 자식 클래스인데 접근 불가?
-		// 이유 => 자기의 인스턴스 변수가 아니다.
-		obj3.publicVar = 100; // OK! 모두 다 접근 가능.
-
-		Exam0215 obj4 = new Exam0215();
-		//obj4.privateVar = 100; // 접근 불가! C 클래스에서만 접근 가능
-		//obj4.defaultVar = 100; // 접근 불가! C 클래스와 같은 패키지가 아니다.
-		obj4.protectedVar = 100; // OK! Exam0210은 C의 자식 클래스이며,
-		// 또한 C로부터 상속 받아서 만든 자기 변수이다.
-		obj4.publicVar = 100;
-	}
-
-	void m1(com.eomcs.oop.ex08.b.sub.C obj) {
-		//obj.privateVar = 100;
-		//obj.defaultVar = 100;
-		//obj.protectedVar = 100;
-		obj.publicVar = 100;
-	}
-
-	void m2(Exam0215 obj) {
-		//obj.privateVar = 100;
-		//obj.defaultVar = 100;
-		obj.protectedVar = 100;
-		obj.publicVar = 100;
-	}
-
-	void m3() {
-		//this.privateVar = 100;
-		//this.defaultVar = 100;
-		this.protectedVar = 100;
-		this.publicVar = 100;
-	}
+  // 같은 객체를 파라미터로 받은 경우
+  static void m3(com.eomcs.oop.ex08.b.Exam0215 obj) {
+    // 다음 obj를 통해 접근하는 변수는
+    // Exam0215 클래스의 인스턴스를 생성할 때 만든 변수이다.
+    // 그러나 Exam0215 클래스에 선언된 변수가 아니라 상속 받은 변수이다.
+    // 상속 받은 변수인 경우 상속 받은 클래스를 기준으로 접근 가능 여부를 따져야 한다.!!!
+    //  obj.privateVar = 100; // 접근 불가!
+    //  obj.defaultVar = 100; // 접근 불가!
+    obj.protectedVar = 100; // OK!! Y 클래스 상속 받아 만든 변수다.
+    obj.publicVar = 100; // OK!! 모두 접근 가능
+  }
 
 
 }
