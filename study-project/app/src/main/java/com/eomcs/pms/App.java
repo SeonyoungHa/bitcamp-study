@@ -10,7 +10,7 @@ import com.eomcs.util.Prompt;
 //  - 0 번을 입력하면 프로그램을 종료한다.
 // 2) 게시판 메뉴를 출력하고 번호를 입력 받는다.
 //  - 사용자가 입력한 메뉴 번호에 따라 실행할 명령어를 설정한다.
-
+// 3) 회원 /  프로젝트 / 작업메뉴 
 public class App {
 
   public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class App {
     ProjectHandler projectHandler = new ProjectHandler(memberHandler);
     TaskHandler taskHandler = new TaskHandler(memberHandler);
 
-    while (true) {
+    MAIN_LOOP : while (true) {
 
       String input = null;
 
@@ -38,7 +38,7 @@ public class App {
         input = "quit";
 
       } else if (menuNo == 1) {
-        while(true) {
+        LOOP: while(true) {
           System.out.println("[메인/게시판]");
           System.out.println("1. 등록");
           System.out.println("2. 목록");
@@ -48,15 +48,93 @@ public class App {
           System.out.println("0. 이전메뉴");
 
           menuNo = Prompt.inputInt("게시판>");
-          if (menuNo == 0) {
-            break; //현재 반복문을 종료하고 이전 메뉴로 돌아간다.
-          } else if (menuNo == 1) {
-
+          switch(menuNo){
+            case 1: input = "/board/add"; break LOOP;
+            case 2: input = "/board/list"; break LOOP;
+            case 3: input = "/board/detail"; break LOOP;
+            case 4: input = "/board/update"; break LOOP;
+            case 5: input = "/board/delete"; break LOOP;
+            case 0: continue MAIN_LOOP;
+            default:
+              System.out.println("무효한 메뉴 번호입니다.");
           }
           System.out.println();
         }
 
-      } else {
+      } else if (menuNo == 2) {
+        LOOP: while(true) {
+          System.out.println("[회원/게시판]");
+          System.out.println("1. 등록");
+          System.out.println("2. 목록");
+          System.out.println("3. 상세보기");
+          System.out.println("4. 변경");
+          System.out.println("5. 삭제");
+          System.out.println("0. 이전메뉴");
+
+          menuNo = Prompt.inputInt("게시판>");
+          switch(menuNo){
+            case 1: input = "/member/add"; break LOOP;
+            case 2: input = "/member/list"; break LOOP;
+            case 3: input = "/member/detail"; break LOOP;
+            case 4: input = "/member/update"; break LOOP;
+            case 5: input = "/member/delete"; break LOOP;
+            case 0: continue MAIN_LOOP;
+            default:
+              System.out.println("무효한 회원 번호입니다.");
+          }
+          System.out.println();
+        }
+      }  else if (menuNo == 3) {
+        LOOP: while(true) {
+          System.out.println("[프로젝트/게시판]");
+          System.out.println("1. 등록");
+          System.out.println("2. 목록");
+          System.out.println("3. 상세보기");
+          System.out.println("4. 변경");
+          System.out.println("5. 삭제");
+          System.out.println("0. 이전메뉴");
+
+          menuNo = Prompt.inputInt("게시판>");
+          switch(menuNo){
+            case 1: input = "/project/add"; break LOOP;
+            case 2: input = "/project/list"; break LOOP;
+            case 3: input = "/project/detail"; break LOOP;
+            case 4: input = "/project/update"; break LOOP;
+            case 5: input = "/project/delete"; break LOOP;
+            case 0: continue MAIN_LOOP;
+            default:
+              System.out.println("무효한 프로젝트 번호입니다.");
+          }
+          System.out.println();
+        }
+      } else if (menuNo == 4) {
+        LOOP: while(true) {
+          System.out.println("[작업/게시판]");
+          System.out.println("1. 등록");
+          System.out.println("2. 목록");
+          System.out.println("3. 상세보기");
+          System.out.println("4. 변경");
+          System.out.println("5. 삭제");
+          System.out.println("0. 이전메뉴");
+
+          menuNo = Prompt.inputInt("게시판>");
+          switch(menuNo){
+            case 1: input = "/board/add"; break LOOP;
+            case 2: input = "/board/list"; break LOOP;
+            case 3: input = "/board/detail"; break LOOP;
+            case 4: input = "/board/update"; break LOOP;
+            case 5: input = "/board/delete"; break LOOP;
+            case 0: continue MAIN_LOOP;
+            default:
+              System.out.println("무효한 작업 번호입니다.");
+          }
+          System.out.println();
+        }
+      } else if (menuNo ==5) {
+        System.out.println();
+      }
+
+      else {
         continue; // 옳지 않은 번호를 입력한 경우에는 다시 메뉴를 출력한다.
       }
 
