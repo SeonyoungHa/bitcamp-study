@@ -10,8 +10,7 @@ import com.eomcs.util.Prompt;
 //  - 0 번을 입력하면 프로그램을 종료한다.
 // 2) 게시판 메뉴를 출력하고 번호를 입력 받는다.
 //  - 사용자가 입력한 메뉴 번호에 따라 실행할 명령어를 설정한다.
-// 3) 회원/프로젝트/작업 메뉴를 출력하고 번호를 입력 받는다.
-// -  사용자가 입력한 메뉴 번호에 따라 실행할 명령에 
+// 3) 회원 /  프로젝트 / 작업메뉴 
 public class App {
 
   public static void main(String[] args) {
@@ -22,7 +21,9 @@ public class App {
     TaskHandler taskHandler = new TaskHandler(memberHandler);
 
     MAIN_LOOP : while (true) {
-      System.out.println();
+
+      String input = null;
+
       System.out.println("[메인]");
       System.out.println("1. 게시판");
       System.out.println("2. 회원");
@@ -30,13 +31,14 @@ public class App {
       System.out.println("4. 작업");
       System.out.println("5. 종료");
       int menuNo = Prompt.inputInt("메인>");
-      System.out.println();
 
+      // 사용자가 명령어를 직접 입력하는 대신에
+      // 제시된 메뉴의 번호를 선택하면 실행할 명령어를 변수에 설정한다.
       if (menuNo == 0) {
-        break;
+        input = "quit";
 
       } else if (menuNo == 1) {
-        while(true) {
+        LOOP: while(true) {
           System.out.println("[메인/게시판]");
           System.out.println("1. 등록");
           System.out.println("2. 목록");
@@ -47,11 +49,11 @@ public class App {
 
           menuNo = Prompt.inputInt("게시판>");
           switch(menuNo){
-            case 1: boardHandler.add(); break;
-            case 2: boardHandler.list(); break;
-            case 3: boardHandler.detail(); break;
-            case 4: boardHandler.update(); break;
-            case 5: boardHandler.delete(); break;
+            case 1: input = "/board/add"; break LOOP;
+            case 2: input = "/board/list"; break LOOP;
+            case 3: input = "/board/detail"; break LOOP;
+            case 4: input = "/board/update"; break LOOP;
+            case 5: input = "/board/delete"; break LOOP;
             case 0: continue MAIN_LOOP;
             default:
               System.out.println("무효한 메뉴 번호입니다.");
@@ -60,7 +62,7 @@ public class App {
         }
 
       } else if (menuNo == 2) {
-        while(true) {
+        LOOP: while(true) {
           System.out.println("[메인/회원]");
           System.out.println("1. 등록");
           System.out.println("2. 목록");
@@ -71,11 +73,11 @@ public class App {
 
           menuNo = Prompt.inputInt("게시판>");
           switch(menuNo){
-            case 1: memberHandler.add();
-            case 2: memberHandler.list();
-            case 3: memberHandler.detail();
-            case 4: memberHandler.update();
-            case 5: memberHandler.delete();
+            case 1: input = "/member/add"; break LOOP;
+            case 2: input = "/member/list"; break LOOP;
+            case 3: input = "/member/detail"; break LOOP;
+            case 4: input = "/member/update"; break LOOP;
+            case 5: input = "/member/delete"; break LOOP;
             case 0: continue MAIN_LOOP;
             default:
               System.out.println("무효한 회원 번호입니다.");
@@ -94,11 +96,11 @@ public class App {
 
           menuNo = Prompt.inputInt("게시판>");
           switch(menuNo){
-            case 1: projectHandler.add();
-            case 2: projectHandler.list();
-            case 3: projectHandler.detail();
-            case 4: projectHandler.update();
-            case 5: projectHandler.delete();
+            case 1: input = "/project/add"; break LOOP;
+            case 2: input = "/project/list"; break LOOP;
+            case 3: input = "/project/detail"; break LOOP;
+            case 4: input = "/project/update"; break LOOP;
+            case 5: input = "/project/delete"; break LOOP;
             case 0: continue MAIN_LOOP;
             default:
               System.out.println("무효한 프로젝트 번호입니다.");
@@ -117,14 +119,14 @@ public class App {
 
           menuNo = Prompt.inputInt("게시판>");
           switch(menuNo){
-            case 1: taskHandler.add();
-            case 2: taskHandler.list();
-            case 3: taskHandler.detail();
-            case 4: taskHandler.update();
-            case 5: taskHandler.delete();
+            case 1: input = "/task/add"; break LOOP;
+            case 2: input = "/task/list"; break LOOP;
+            case 3: input = "/task/detail"; break LOOP;
+            case 4: input = "/task/update"; break LOOP;
+            case 5: input = "/task/delete"; break LOOP;
             case 0: continue MAIN_LOOP;
             default:
-              System.out.println("무효한 메뉴 번호입니다.");
+              System.out.println("무효한 작업 번호입니다.");
           }
           System.out.println();
         }
@@ -132,8 +134,78 @@ public class App {
       else {
         continue; // 옳지 않은 번호를 입력한 경우에는 다시 메뉴를 출력한다.
       }
+
+      if (input.equals("exit") || input.equals("quit")) {
+        System.out.println("안녕!");
+        break;
+      } else if (input.equals("/member/add")) {
+        memberHandler.add();
+
+      } else if (input.equals("/member/list")) {
+        memberHandler.list();
+
+      } else if (input.equals("/member/detail")) {
+        memberHandler.detail();
+
+      } else if (input.equals("/member/update")) {
+        memberHandler.update();
+
+      } else if (input.equals("/member/delete")) {
+        memberHandler.delete();
+
+      }  else if (input.equals("/project/add")) {
+        projectHandler.add();
+
+      }  else if (input.equals("/project/list")) {
+        projectHandler.list();
+
+      }  else if (input.equals("/project/detail")) {
+        projectHandler.detail();
+
+      }  else if (input.equals("/project/update")) {
+        projectHandler.update();
+
+      }  else if (input.equals("/project/delete")) {
+        projectHandler.delete();
+
+      }  else if (input.equals("/task/add")) {
+        taskHandler.add();
+
+      }  else if (input.equals("/task/list")) {
+        taskHandler.list();
+
+      }  else if (input.equals("/task/detail")) {
+        taskHandler.detail();
+
+      }  else if (input.equals("/task/update")) {
+        taskHandler.update();
+
+      }  else if (input.equals("/task/delete")) {
+        taskHandler.delete();
+
+      }  else if (input.equals("/board/add")) {
+        boardHandler.add();
+
+      }  else if (input.equals("/board/list")) {
+        boardHandler.list();
+
+      }  else if (input.equals("/board/detail")) {
+        boardHandler.detail();
+
+      }  else if (input.equals("/board/update")) {
+        boardHandler.update();
+
+      }  else if (input.equals("/board/delete")) {
+        boardHandler.delete();
+
+      } else {
+        System.out.println("실행할 수 없는 명령입니다.");
+      }
+      System.out.println();
     }
 
+
+    // Prompt 가 소유하고 관리하고 있는 자원을 닫으라고 명령한다. 
     Prompt.close();
   }
 }
