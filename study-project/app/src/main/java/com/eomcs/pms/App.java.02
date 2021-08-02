@@ -6,11 +6,10 @@ import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
 import com.eomcs.util.Prompt;
 
-// 1) 메인 메뉴를 출력하고 번호를 입력 받는다.
-//  - 0 번을 입력하면 프로그램을 종료한다.
+// 1) 메인 메뉴를 출력하고 번호를 입력 받는다.(App.java.01)
+//    - 0 번을 입력하면 프로그램을 종료한다.
 // 2) 게시판 메뉴를 출력하고 번호를 입력 받는다.
-//  - 사용자가 입력한 메뉴 번호에 따라 실행할 명령어를 설정한다.
-
+//    - 사용자가 입력한 메뉴 번호에 따라 실행할 명령어를 설정한다.
 public class App {
 
   public static void main(String[] args) {
@@ -20,7 +19,7 @@ public class App {
     ProjectHandler projectHandler = new ProjectHandler(memberHandler);
     TaskHandler taskHandler = new TaskHandler(memberHandler);
 
-    MAIN_LOOP : while (true) {
+    MAIN_LOOP: while (true) {
 
       String input = null;
 
@@ -29,16 +28,16 @@ public class App {
       System.out.println("2. 회원");
       System.out.println("3. 프로젝트");
       System.out.println("4. 작업");
-      System.out.println("5. 종료");
-      int menuNo = Prompt.inputInt("메인>");
+      System.out.println("0. 종료");
+      int menuNo = Prompt.inputInt("메인> ");
 
-      // 사용자가 명령어를 직접 입력하는 대신에
+      // 사용자가 명령어를 직접 입력하는 대신에 
       // 제시된 메뉴의 번호를 선택하면 실행할 명령어를 변수에 설정한다.
       if (menuNo == 0) {
         input = "quit";
 
       } else if (menuNo == 1) {
-        LOOP: while(true) {
+        LOOP: while (true) {
           System.out.println("[메인/게시판]");
           System.out.println("1. 등록");
           System.out.println("2. 목록");
@@ -47,8 +46,8 @@ public class App {
           System.out.println("5. 삭제");
           System.out.println("0. 이전메뉴");
 
-          menuNo = Prompt.inputInt("게시판>");
-          switch(menuNo){
+          menuNo = Prompt.inputInt("게시판> ");
+          switch (menuNo) {
             case 1: input = "/board/add"; break LOOP;
             case 2: input = "/board/list"; break LOOP;
             case 3: input = "/board/detail"; break LOOP;
@@ -60,7 +59,6 @@ public class App {
           }
           System.out.println();
         }
-
       } else {
         continue; // 옳지 않은 번호를 입력한 경우에는 다시 메뉴를 출력한다.
       }
@@ -84,6 +82,9 @@ public class App {
         memberHandler.delete();
 
       }  else if (input.equals("/project/add")) {
+        // add() 메서드가 사용할 의존 객체를 미리 주입했기 때문에
+        // 이제 파라미터로 전달할 필요가 없다.
+        //        projectHandler.add(memberHandler); // 이전 코드 
         projectHandler.add();
 
       }  else if (input.equals("/project/list")) {
@@ -93,12 +94,18 @@ public class App {
         projectHandler.detail();
 
       }  else if (input.equals("/project/update")) {
+        // update() 메서드가 사용할 의존 객체를 미리 주입했기 때문에
+        // 이제 파라미터로 전달할 필요가 없다.
+        //        projectHandler.update(memberHandler); // 이전 코드
         projectHandler.update();
 
       }  else if (input.equals("/project/delete")) {
         projectHandler.delete();
 
       }  else if (input.equals("/task/add")) {
+        // add() 메서드가 사용할 의존 객체를 미리 주입했기 때문에
+        // 이제 파라미터로 전달할 필요가 없다.
+        //        taskHandler.add(memberHandler); // 이전 코드
         taskHandler.add();
 
       }  else if (input.equals("/task/list")) {
@@ -108,6 +115,9 @@ public class App {
         taskHandler.detail();
 
       }  else if (input.equals("/task/update")) {
+        // update() 메서드가 사용할 의존 객체를 미리 주입했기 때문에
+        // 이제 파라미터로 전달할 필요가 없다.
+        //        taskHandler.update(memberHandler); // 이전 코드
         taskHandler.update();
 
       }  else if (input.equals("/task/delete")) {
@@ -131,9 +141,9 @@ public class App {
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
       }
+
       System.out.println();
     }
-
 
     // Prompt 가 소유하고 관리하고 있는 자원을 닫으라고 명령한다. 
     Prompt.close();
