@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex08.b;
 
-public class A {
+public class X {
   private int privateVar;
   int defaultVar;
   protected int protectedVar;

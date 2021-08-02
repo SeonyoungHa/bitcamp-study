@@ -1,17 +1,17 @@
-// 캡슐화(encapsulation) - 같은 패키지의 멤버가 접근할 수 있는 범위
+// 캡슐화(encapsulation) - 다른 패키지의 멤버가 접근할 수 있는 범위
 package com.eomcs.oop.ex08.b;
 
 
-public class Exam0211{
+public class Exam0212{
 
   public static void main(String[] args) {
-    X obj1 = new X();
+    // B 클래스는 Exam0212와 다른 패키지이다.
+    com.eomcs.oop.ex08.b.sub.Y obj = new com.eomcs.oop.ex08.b.sub.Y ();
 
-    //obj1.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용가능.
-    obj1.defaultVar = 100; // OK! 이 클래스는 A 클래스와 같은 패키지에 소속되어 있다.
-    obj1.protectedVar = 100; // OK! 비록 이 클래스가 자식클래스는 아니지만
-    // 같은 패키지에 소속되어 있다.
-    obj1.publicVar = 100; // OK! 모두 다 접근 가능!
+    //  obj.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용가능.
+    //  obj.defaultVar = 100; // OK! 이 클래스는 A 클래스와 같은 패키지에 소속되어 있다.
+    //  obj.protectedVar = 100; // OK! 비록 이 클래스가 자식클래스는 아니지만
+    obj.publicVar = 100; // OK! 모두 다 접근 가능!
 
   }
 
