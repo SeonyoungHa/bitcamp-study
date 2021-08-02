@@ -17,7 +17,7 @@ class CarFactory {
   // 예2) 인스턴스를 오직 한개만 생성해야 할 경우 
   // - 인스턴스를 여러개 생성할 필요가 없는 경우에 생성자를 private 으로 막는다.
   // - getInstance() 같은 스태틱 메서드를 통해 인스턴스를 한개만 만들어 사용한다.
-  // - 이런 설계 기법을 "singleone" 패턴이라 부룬다.
+  // - 이런 설계 기법을 "singletone" 패턴이라 부룬다.
   //
 
   static CarFactory factory = null;
@@ -72,7 +72,7 @@ public class Exam0222{
         c.model, c.maker, c.cc, c.valve);
 
     // Exam0211이나 
-    // Car c2 = Car.creat("티코");
+    // Car c2 = Car.create("티코");
     //
     // Exam0222의 경우처럼
     //  예) CarFactory factory = CarFactory.getInstance();
