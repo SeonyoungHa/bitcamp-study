@@ -7,11 +7,7 @@ import com.eomcs.pms.handler.TaskHandler;
 import com.eomcs.util.Prompt;
 
 // 1) 메인 메뉴를 출력하고 번호를 입력 받는다.
-//  - 0 번을 입력하면 프로그램을 종료한다.
-// 2) 게시판 메뉴를 출력하고 번호를 입력 받는다.
-//  - 사용자가 입력한 메뉴 번호에 따라 실행할 명령어를 설정한다.
-
-public class App {
+public class App2 {
 
   public static void main(String[] args) {
 
@@ -22,8 +18,6 @@ public class App {
 
     while (true) {
 
-      String input = null;
-
       System.out.println("[메인]");
       System.out.println("1. 게시판");
       System.out.println("2. 회원");
@@ -32,12 +26,12 @@ public class App {
       System.out.println("5. 종료");
       int menuNo = Prompt.inputInt("메인>");
 
-      // 사용자가 명령어를 직접 입력하는 대신에
-      // 제시된 메뉴의 번호를 선택하면 실행할 명령어를 변수에 설정한다.
       if (menuNo == 0) {
-        input = "quit";
+        System.out.println("안녕!");
+        break;
+      }
 
-      } else if (menuNo == 1) {
+      else if (menuNo == 1) {
         while(true) {
           System.out.println("[메인/게시판]");
           System.out.println("1. 등록");
@@ -46,8 +40,8 @@ public class App {
           System.out.println("4. 변경");
           System.out.println("5. 삭제");
           System.out.println("0. 이전메뉴");
-
           menuNo = Prompt.inputInt("게시판>");
+
           if (menuNo == 0) {
             break; //현재 반복문을 종료하고 이전 메뉴로 돌아간다.
           } else if (menuNo == 1) {
@@ -56,9 +50,10 @@ public class App {
           System.out.println();
         }
 
-      } else {
-        continue; // 옳지 않은 번호를 입력한 경우에는 다시 메뉴를 출력한다.
       }
+
+      /*
+      String input = Prompt.inputString("명령> ");
 
       if (input.equals("exit") || input.equals("quit")) {
         System.out.println("안녕!");
@@ -125,7 +120,7 @@ public class App {
 
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
-      }
+      }*/
       System.out.println();
     }
 
