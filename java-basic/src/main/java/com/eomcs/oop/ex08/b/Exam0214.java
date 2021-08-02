@@ -1,21 +1,19 @@
-// 캡슐화(encapsulation) - 서브 클래스의 멤버가 접근할 수 있는 범위 테스트
+// 캡슐화 접근 범위 테스트 - 서브 클래스의 멤버가 접근할 수 있는 범위 II
 package com.eomcs.oop.ex08.b;
 
-public class Exam0213 extends com.eomcs.oop.ex08.b.sub.Y {
+public class Exam0214 extends com.eomcs.oop.ex08.b.sub.Y {
 
   public static void main(String[] args) {
-    // 다른 패키지의 클래스를 그 클래스의 서브 클래스가 어디까지 접근할 수 있을까?
-    com.eomcs.oop.ex08.b.sub.Y obj1 = new com.eomcs.oop.ex08.b.sub.Y();
+    Exam0214 obj4 = new Exam0214();
 
-    //obj.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용 가능.
-    //obj.defaultVar = 100; // 접근 불가! 같은 패키지까지만 접근 가능.
-    //obj.protectedVar = 100; // 접근 불가! 같은 패키지 또는 자식 클래스 접근 가능
-    // 자식 클래스인데 접근 불가?
-    // 이유 => 서브 클래스를 통해 만든 인스턴스 변수가 아니다.
-    //obj.publicVar = 100; // OK! 모두 다 접근 가능.
 
+    //obj.privateVar = 100; // 접근 불가! 오직 그 클래스에서만 사용 가능
+    //obj.defaultVar = 100; // 접근 불가! 같은 패키지가 아니다.
+
+    obj4.protectedVar = 100; // OK! Exam0214은 Y의 자식 클래스이며,
+    // 또한 Y로부터 상속 받아서 만든 자기 변수이다.
+    obj4.publicVar = 100;
   }
-
 
 }
 
