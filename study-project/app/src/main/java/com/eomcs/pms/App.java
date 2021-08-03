@@ -4,10 +4,6 @@ import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
-import com.eomcs.pms.menu.BoardDeleteMenu;
-import com.eomcs.pms.menu.BoardDetailMenu;
-import com.eomcs.pms.menu.BoardListMenu;
-import com.eomcs.pms.menu.BoardUpdateMenu;
 import com.eomcs.pms.menu.Menu;
 import com.eomcs.pms.menu.MenuGroup;
 import com.eomcs.util.Prompt;
@@ -55,15 +51,32 @@ public class App {
       @Override
       public void execute() {
         boardHandler.add();
-      }
-    });
+      }});
 
-    boardMenu.add(new BoardListMenu(boardHandler));
-    boardMenu.add(new BoardDetailMenu(boardHandler));
-    boardMenu.add(new BoardUpdateMenu(boardHandler));
-    boardMenu.add(new BoardDeleteMenu(boardHandler));
 
-    return mainMenuGroup;
+    boardMenu.add(new Menu("목록"){
+      @Override
+      public void execute() {
+        boardHandler.list();
+      }});
+
+    boardMenu.add(new Menu("상세보기"){
+      @Override
+      public void execute() {
+        boardHandler.detail();
+      }});
+
+    boardMenu.add(new Menu("변경"){
+      @Override
+      public void execute() {
+        boardHandler.update();
+      }});
+
+    boardMenu.add(new Menu("삭제"){
+      @Override
+      public void execute() {
+        boardHandler.delete();
+      }});
   }
 
   static void doBoardMenu() {
