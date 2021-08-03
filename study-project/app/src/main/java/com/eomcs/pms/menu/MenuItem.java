@@ -12,7 +12,7 @@ public class MenuItem extends Menu {
 
   //리스너를 보관하는 배열을 준비한다.
 
-  ActionvListener[] listeners = new ActionvListener[10];
+  ActionListener[] listeners = new ActionListener[10];
   int size;
 
   public MenuItem(String title) {
@@ -20,7 +20,7 @@ public class MenuItem extends Menu {
   }
 
   // 리스너를 배열에 등록하는 일을 한다.
-  public void addActionvListener(ActionvListener listener) {
+  public void addActionvListener(ActionListener listener) {
     if(this.size == this.listeners.length) {
       return;
     }
