@@ -15,13 +15,13 @@ public class MenuTest {
     rootMenu.add(taskMenu);
 
     MenuItem boardAddMenu = new MenuItem("등록");
-    boardAddMenu.addActionvListener(new BoardAddListener());
+    boardAddMenu.addActionListener(new BoardAddListener());
 
     MenuItem boardListMenu = new MenuItem("목록");
-    boardListMenu.addActionvListener(new BoardListListener());
+    boardListMenu.addActionListener(new BoardListListener());
 
     MenuItem boardDetailMenu = new MenuItem("상세조회");
-    boardDetailMenu.addActionvListener(new BoardDetailListener());
+    boardDetailMenu.addActionListener(new BoardDetailListener());
 
     MenuItem boardUpdateMenu = new MenuItem("변경");
     MenuItem boardDeleteMenu = new MenuItem("삭제");

@@ -4,11 +4,11 @@ import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
-import com.eomcs.pms.menu.BoardAddMenu;
 import com.eomcs.pms.menu.BoardDeleteMenu;
 import com.eomcs.pms.menu.BoardDetailMenu;
 import com.eomcs.pms.menu.BoardListMenu;
 import com.eomcs.pms.menu.BoardUpdateMenu;
+import com.eomcs.pms.menu.Menu;
 import com.eomcs.pms.menu.MenuGroup;
 import com.eomcs.util.Prompt;
 
@@ -40,17 +40,24 @@ public class App {
     Menu mainMenu = createMenu();
     mainMenu.execute();
 
+
     Prompt.close();
   }
 
   static Menu createMenu() {
-    MenuGroup mainMenuGroup = new MenuGroup("메인", true);
+    MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new BoardAddMenu(boardHandler));
+    boardMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        boardHandler.add();
+      }
+    });
+
     boardMenu.add(new BoardListMenu(boardHandler));
     boardMenu.add(new BoardDetailMenu(boardHandler));
     boardMenu.add(new BoardUpdateMenu(boardHandler));
