@@ -30,5 +30,11 @@ public class MenuItem extends Menu {
   @Override
   public void execute() {
     // 메뉴를 실행하면 이 메뉴를 등록한 모든 리스너에게 알린다.
+    for (int i = 0; i < this.size; i++) {
+      // 배열에 보관된 각각의 리스너 객체에 대해
+      // ActionListener 규칙에 따라 메서드를 호출한다.
+      // => 이것이 리스너에게 알린다는 의미다.
+      this.listeners[i].doAction();
+    }
   }
 }
