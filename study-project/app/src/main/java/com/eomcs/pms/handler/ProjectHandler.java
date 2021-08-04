@@ -48,12 +48,6 @@ public class ProjectHandler {
 
     project.members = promptMembers("팀원?(완료: 빈 문자열) ");
 
-    if (size == projects.length) {
-      Project[] arr = new Project[projects.length + (projects.length >> 1)];
-      for (int i = 0; i <size; i++) {
-        arr[i] = projects[i];
-      }
-    }
     this.projects[this.size++] = project;
   }
 

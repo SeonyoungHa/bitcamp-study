@@ -43,12 +43,6 @@ public class TaskHandler {
       return; 
     }
 
-    if (size == tasks.length) {
-      Task[] arr = new Task[tasks.length + (tasks.length) >> 1];
-      for (int i = 0; i <size; i++) {
-        arr[i] = tasks[i];
-      }
-    }
     this.tasks[this.size++] = task;
   }
 
