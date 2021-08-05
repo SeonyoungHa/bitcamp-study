@@ -1,55 +1,64 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
 
 public class MemberList {
 
   static final int MAX_LENGTH = 5;
-  Board[] boards = new Board[MAX_LENGTH];
+  Member[] members = new Member[MAX_LENGTH];
   int size = 0;
 
-  public void add(Board board) {
-    this.boards[this.size++] = board;
+  public void add(Member member) {
+    this.members[this.size++] = member;
   }
 
-  public Board[] toArray() {
-    Board[] arr = new Board[this.size]; // 배열에 저장된 값을 담을 정도의 크기를 가진 새 배열을 만든다.
+  public Member[] toArray() {
+    Member[] arr = new Member[this.size]; // 배열에 저장된 값을 담을 정도의 크기를 가진 새 배열을 만든다.
     for (int i = 0; i < this.size; i++) { // 배열에 저장된 값을 새 배열에 복사한다.
-      arr[i] = boards[i];
+      arr[i] = members[i];
     }
     return arr; // 새 배열을 리턴한다.
   }
 
-  public Board findByNo(int no) {
+  public Member findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        return boards[i];
+      if (members[i].no == no) {
+        return members[i];
       }
     }
     return null;
   }
 
-  public boolean remove(Board board) {
-    int index = indexOf(board);
+  public boolean remove(Member member) {
+    int index = indexOf(member);
     if (index == -1) {
       return false;
     }
 
     for (int i = index + 1; i < this.size; i++) {
-      this.boards[i - 1] = this.boards[i];
+      this.members[i - 1] = this.members[i];
     }
-    this.boards[--this.size] = null;
+    this.members[--this.size] = null;
 
     return true;
   }
 
-  private int indexOf(Board board) {
+  private int indexOf(Member member) {
     for (int i = 0; i < this.size; i++) {
-      if (this.boards[i] == board) {
+      if (this.members[i] == member) {
         return i;
       }
     }
     return -1;
+  }
+
+  public boolean exist(String name) {
+    for (int i = 0; i < this.size; i++) {
+      if (this.members[i].name.equals(name)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
