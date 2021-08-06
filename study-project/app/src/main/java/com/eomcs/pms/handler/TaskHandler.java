@@ -1,16 +1,16 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.LinkedList;
 import com.eomcs.pms.domain.Task;
 import com.eomcs.util.Prompt;
 
 public class TaskHandler {
 
-  LinkedList taskList = new LinkedList();
+  List taskList;
   MemberHandler memberHandler;
 
-  public TaskHandler(MemberHandler memberHandler) {
+  public TaskHandler(List taskList , MemberHandler memberHandler) {
+    this.taskList = taskList;
     this.memberHandler = memberHandler;
   }
 
