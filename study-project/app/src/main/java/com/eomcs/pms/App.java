@@ -1,9 +1,6 @@
 package com.eomcs.pms;
 
-import com.eomcs.pms.handler.ArrayList;
 import com.eomcs.pms.handler.BoardHandler;
-import com.eomcs.pms.handler.LinkedList;
-import com.eomcs.pms.handler.List;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
@@ -13,19 +10,13 @@ import com.eomcs.util.Prompt;
 
 public class App {
 
-  List boardList = new ArrayList();
-  List memberList = new LinkedList();
-  List projectList = new ArrayList();
-  List taskList = new LinkedList();
-
-
-  BoardHandler boardHandler = new BoardHandler(boardList);
-  MemberHandler memberHandler = new MemberHandler(memberList);
-  ProjectHandler projectHandler = new ProjectHandler(projectList, memberHandler);
-  TaskHandler taskHandler = new TaskHandler(taskList, memberHandler);
+  BoardHandler boardHandler = new BoardHandler();
+  MemberHandler memberHandler = new MemberHandler();
+  ProjectHandler projectHandler = new ProjectHandler(memberHandler.getMemberList());
+  TaskHandler taskHandler = new TaskHandler(memberHandler.getMemberList());
 
   public static void main(String[] args) {
-    App app = new App(); 
+    App app = new App();
     app.service();
   }
 

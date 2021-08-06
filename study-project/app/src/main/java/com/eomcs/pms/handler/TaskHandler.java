@@ -6,12 +6,12 @@ import com.eomcs.util.Prompt;
 
 public class TaskHandler {
 
-  List taskList;
-  MemberHandler memberHandler;
+  TaskList2 taskList = new TaskList2();
+  MemberList2 memberList;
 
-  public TaskHandler(List taskList , MemberHandler memberHandler) {
-    this.taskList = taskList;
-    this.memberHandler = memberHandler;
+
+  public TaskHandler(MemberList2 memberList) {
+    this.memberList = memberList;
   }
 
   public void add() {
@@ -36,10 +36,9 @@ public class TaskHandler {
   public void list() {
     System.out.println("[작업 목록]");
 
-    Object[] list = taskList.toArray();
+    Task[] list = taskList.toArray();
 
-    for (Object obj : list) {
-      Task task = (Task) obj;
+    for (Task task : list) {
       System.out.printf("%d, %s, %s, %s, %s\n",
           task.no, 
           task.content, 
@@ -53,7 +52,7 @@ public class TaskHandler {
     System.out.println("[작업 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -69,7 +68,7 @@ public class TaskHandler {
     System.out.println("[작업 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -103,7 +102,7 @@ public class TaskHandler {
     System.out.println("[작업 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -131,7 +130,7 @@ public class TaskHandler {
   private String promptOwner(String label) {
     while (true) {
       String owner = Prompt.inputString(label);
-      if (this.memberHandler.exist(owner)) {
+      if (this.memberList.exist(owner)) {
         return owner;
       } else if (owner.length() == 0) {
         return null;
@@ -156,16 +155,6 @@ public class TaskHandler {
     return Prompt.inputInt("> ");
   }
 
-  private Task findByNo(int no) {
-    Object[] arr = taskList.toArray();
-    for (Object obj : arr) {
-      Task task = (Task) obj;
-      if (task.no == no) {
-        return task;
-      }
-    }
-    return null;
-  }
 }
 
 

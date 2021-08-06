@@ -6,11 +6,7 @@ import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
-  List boardList;
-
-  public BoardHandler(List boardList) {
-    this.boardList = boardList;
-  }
+  BoardList2 boardList = new BoardList2();
 
   public void add() {
     System.out.println("[새 게시글]");
@@ -29,10 +25,9 @@ public class BoardHandler {
   public void list() {
     System.out.println("[게시글 목록]");
 
-    Object[] list = boardList.toArray();
+    Board[] list = boardList.toArray();
 
-    for (Object obj : list) {
-      Board board = (Board) obj;
+    for (Board board : list) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           board.no, 
           board.title, 
@@ -47,7 +42,7 @@ public class BoardHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -65,7 +60,7 @@ public class BoardHandler {
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -90,7 +85,7 @@ public class BoardHandler {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -106,17 +101,6 @@ public class BoardHandler {
     boardList.remove(board);
 
     System.out.println("게시글을 삭제하였습니다.");
-  }
-
-  private Board findByNo(int no) {
-    Object[] arr = boardList.toArray();
-    for (Object obj : arr) {
-      Board board = (Board) obj;
-      if (board.no == no) {
-        return board;
-      }
-    }
-    return null;
   }
 }
 
