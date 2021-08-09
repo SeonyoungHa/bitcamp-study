@@ -3,11 +3,11 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Board {
-  public int no;
-  public String title;
-  public String content;
-  public String writer;
-  public Date registeredDate;
-  public int viewCount;
-  public int like;
+	private int no;
+	private String title;
+	private String content;
+	private String writer;
+	private Date registeredDate;
+	private int viewCount;
+	private int like;
 }
