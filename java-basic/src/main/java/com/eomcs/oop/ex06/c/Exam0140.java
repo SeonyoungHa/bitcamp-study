@@ -1,8 +1,6 @@
 // 오버라이딩(overriding) - 필드 및 메서드 오버라이딩
 package com.eomcs.oop.ex06.c;
 
-import com.eomcs.oop.ex06.c.Exam0130.A4;
-
 public class Exam0140 {
 
   static class A {
@@ -12,12 +10,9 @@ public class Exam0140 {
 
     void print() {
       System.out.println("A.print():");
-      System.out.printf("  => this.name(%s)\n",
-          this.name);
-      System.out.printf("  => this.tel(%s)\n",
-          this.tel);
-      System.out.printf("  => this.working(%s)\n",
-          this.working);
+      System.out.printf("  => this.name(%s)\n", this.name);
+      System.out.printf("  => this.tel(%s)\n", this.tel);
+      System.out.printf("  => this.working(%s)\n", this.working);
     }
   }
 
@@ -44,13 +39,12 @@ public class Exam0140 {
 
   public static void main(String[] args) {
     A4 obj = new A4();
-
-    obj.name = "홍길동"; //A의 name
-    obj.tel = "1111-1111"; //A의 tel
-    //obj.working = true; // A4의 working : obj의 클래스에서 먼저 필드를 찾기 때문이다.
+    obj.name = "홍길동"; // A의 name
+    obj.tel = "1111-1111"; // A의 tel
+    //    obj.working = true; // A4의 working : obj의 클래스에서 먼저 필드를 찾기 때문이다.
     obj.working = "취업";
-    
-    obj.print(); // A4의 print() 호출 : A4에서 상속 받은 print()를 재정의 했기 때문이다.
+
+    obj.print(); // A4의 print() 호출 : A4에서 상속 받은 print()를 재정의 했기 때문이다. 
 
   }
 }
