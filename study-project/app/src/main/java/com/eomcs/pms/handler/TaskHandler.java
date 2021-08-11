@@ -6,12 +6,22 @@ import com.eomcs.util.Prompt;
 
 public class TaskHandler {
 
+<<<<<<< HEAD
   TaskList2 taskList = new TaskList2();
   MemberList2 memberList;
 
 
   public TaskHandler(MemberList2 memberList) {
     this.memberList = memberList;
+=======
+  List taskList;
+  MemberHandler memberHandler;
+
+
+  public TaskHandler(List taskList, MemberHandler memberHandler) {
+    this.taskList = taskList;
+    this.memberHandler = memberHandler;
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
   }
 
   public void add() {
@@ -23,7 +33,11 @@ public class TaskHandler {
     task.content = Prompt.inputString("내용? ");
     task.deadline = Prompt.inputDate("마감일? ");
     task.status = promptStatus();
+<<<<<<< HEAD
     task.owner = promptOwner("담당자?(취소: 빈 문자열) ");
+=======
+    task.owner = memberHandler.promptMember("담당자?(취소: 빈 문자열) ");
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
     if (task.owner == null) {
       System.out.println("작업 등록을 취소합니다.");
       return; 
@@ -36,9 +50,16 @@ public class TaskHandler {
   public void list() {
     System.out.println("[작업 목록]");
 
+<<<<<<< HEAD
     Task[] list = taskList.toArray();
 
     for (Task task : list) {
+=======
+    Object[] list = taskList.toArray();
+
+    for (Object obj : list) {
+      Task task = (Task) obj;
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
       System.out.printf("%d, %s, %s, %s, %s\n",
           task.no, 
           task.content, 
@@ -52,7 +73,11 @@ public class TaskHandler {
     System.out.println("[작업 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
+<<<<<<< HEAD
     Task task = taskList.findByNo(no);
+=======
+    Task task = findByNo(no);
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -68,7 +93,11 @@ public class TaskHandler {
     System.out.println("[작업 변경]");
     int no = Prompt.inputInt("번호? ");
 
+<<<<<<< HEAD
     Task task = taskList.findByNo(no);
+=======
+    Task task = findByNo(no);
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -77,7 +106,11 @@ public class TaskHandler {
     String content = Prompt.inputString(String.format("내용(%s)? ", task.content));
     Date deadline = Prompt.inputDate(String.format("마감일(%s)? ", task.deadline));
     int status = promptStatus(task.status);
+<<<<<<< HEAD
     String owner = promptOwner(String.format(
+=======
+    String owner = memberHandler.promptMember(String.format(
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
         "담당자(%s)?(취소: 빈 문자열) ", task.owner));
     if (owner == null) {
       System.out.println("작업 변경을 취소합니다.");
@@ -102,7 +135,11 @@ public class TaskHandler {
     System.out.println("[작업 삭제]");
     int no = Prompt.inputInt("번호? ");
 
+<<<<<<< HEAD
     Task task = taskList.findByNo(no);
+=======
+    Task task = findByNo(no);
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -127,6 +164,7 @@ public class TaskHandler {
     }
   }
 
+<<<<<<< HEAD
   private String promptOwner(String label) {
     while (true) {
       String owner = Prompt.inputString(label);
@@ -139,6 +177,8 @@ public class TaskHandler {
     }
   }
 
+=======
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
   private int promptStatus() {
     return promptStatus(-1);
   }
@@ -155,6 +195,20 @@ public class TaskHandler {
     return Prompt.inputInt("> ");
   }
 
+<<<<<<< HEAD
+=======
+  private Task findByNo(int no) {
+    Object[] arr = taskList.toArray();
+    for (Object obj : arr) {
+      Task task = (Task) obj;
+      if (task.no == no) {
+        return task;
+      }
+    }
+    return null;
+  }
+
+>>>>>>> c25052651b135f81a724e81d1ea2de7b66de818e
 }
 
 
