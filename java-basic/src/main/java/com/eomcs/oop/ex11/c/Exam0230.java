@@ -10,11 +10,11 @@ class B3 {
     int v1 = 100;
 
     void test() {
-      int v2 = 1000;
+      int v1 = 1000;
 
-      System.out.println(v1); //로컬 변수 
-      System.out.println(this.v1); // 인스턴스 변수 
-      System.out.println(B3.this.v1); // 바깥 객체의 인스턴스 변수 
+      System.out.printf("v1 = %d\n", v1); //로컬 변수 
+      System.out.printf("this.v1 = %d\n", this.v1); // 인스턴스 변수 
+      System.out.printf("B3.this.v1 = %d\n", B3.this.v1); // 바깥 객체의 인스턴스 변수 
     }
   }
 }
@@ -23,8 +23,23 @@ public class Exam0230 {
 
   public static void main(String[] args) {
     B3 outer = new B3();
-    B3.X obj = outer.new X();
-    obj.test();
+    outer.v1 = 11;
+
+    B3.X x1 = outer.new X();
+    x1.test();
+    System.out.println("---------------------------");
+
+    B3.X x2 = outer.new X();
+    x2.test();
+    System.out.println("---------------------------");
+
+    B3 outer2 = new B3();
+    outer.v1 = 22;
+
+    B3.X x3 = outer.new X();
+    x3.test();
+    System.out.println("---------------------------");
+
   }
 
 }
