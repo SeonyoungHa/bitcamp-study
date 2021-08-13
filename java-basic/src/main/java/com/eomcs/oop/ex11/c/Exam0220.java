@@ -4,8 +4,10 @@ package com.eomcs.oop.ex11.c;
 class B2 {
 
   // 인스턴스 멤버
-  int v2 = 20;
-  void m2() {}
+  int v2;
+  void m2() {
+    System.out.println("B2.v2 = " + this.v2);
+  }
 
   class X {
 
@@ -17,11 +19,10 @@ class B2 {
       // 그래서 자바는 inner 객체에 보관된 바깥 객체를 가리키기 위해
       // 다음의 문법을 제공하고 있다.
       // =>   바깥클래스명.this
-      //
+      // 위의 문법을 이용하여 바깥 객체에 접근할 수 있다.
+      // 
       System.out.println(B2.this.v2); 
-      System.out.println(B2.this.v3); 
-      System.out.println(B2.this.v4); 
-      System.out.println("-------------------------");
+      B2.this.m2();
     }
   }
 }
@@ -29,15 +30,14 @@ class B2 {
 public class Exam0220 {
 
   public static void main(String[] args) {
-    B outer = new B();
+    B2 outer = new B2();
+    outer.v2 = 100;
+    outer.m2();
 
-    B.X obj = outer.new X();
-    obj.test();
+    B2 outer2 = new B2();
+    outer2.v2 = 200;
+    outer.m2();
 
-    System.out.println("=================================");
-
-    System.out.println(B.v1);
-    System.out.println(outer.v2);
   }
 
 }
