@@ -10,6 +10,13 @@ class B2 {
   }
 
   class X {
+    // 바깥 객체의 주소를 저장할 빌트인 필드
+    //  B2 this$0;
+
+    //inner 객체를 생성할 때 바깥 객체의 주소를 받는 생성자
+    //    public X(B2 p) {
+    //      this.this$0 = p;
+    //    }
 
     void test() {
       // 바깥 객체의 인스턴스 멤버에 접근하려면,
@@ -20,8 +27,10 @@ class B2 {
       // 다음의 문법을 제공하고 있다.
       // =>   바깥클래스명.this
       // 위의 문법을 이용하여 바깥 객체에 접근할 수 있다.
-      // 
-      System.out.println(B2.this.v2); 
+      // 즉 inner 객체를 만들 때 사용한 바깥 객체에 접근하고 싶다면
+      // => B2.this 문법을 사용하라!
+      //
+      System.out.println(B2.this.v2); //--> this.this$0.v2
       B2.this.m2();
     }
   }
@@ -37,6 +46,12 @@ public class Exam0220 {
     B2 outer2 = new B2();
     outer2.v2 = 200;
     outer.m2();
+
+    //inner 객체 생성
+    B2.X inner = outer.new X(); // --> new X(outer)
+    B2.X inner2 = outer2.new X(); // --> new X(outer2)
+
+    inner.test();
 
   }
 
