@@ -30,6 +30,8 @@ class D {
 			//        private final synthetic int val$v2; <== 바깥 메서드의 로컬 변수 저장
 			//
 			void f1() {
+				// 그래서 로컬 클래스에서는 바깥 메서드의 로컬 변수를
+				// 마치 자기것인양 사용할 수 있는 것이다.
 				System.out.println(a); // m1() 에 선언된 로컬 변수를 가르킨다.
 			}
 		}
