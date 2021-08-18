@@ -3,21 +3,21 @@ package com.eomcs.oop.ex11.e;
 
 public class Exam0120 {
 
-	// 클래스는 static과 non-static이 구분된다.
-	static abstract class A {
-		abstract void print();
-	}
+  // 클래스는 static과 non-static이 구분된다.
+  static abstract class A {
+    abstract void print();
+  }
 
-	public static void main(final String[] args) {
-		// 1) 로컬 클래스로 서브 클래스 만들기
-		class My extends A {
-			@Override
-			public void print() {
-				System.out.println("Hello!");
-			}
-		}
+  public static void main(final String[] args) {
+    // 1) 로컬 클래스로 서브 클래스 만들기
+    class My extends A {
+      @Override
+      public void print() {
+        System.out.println("Hello!");
+      }
+    }
 
-		A obj = new My();
-		obj.print();
-	}
+    A obj = new My();
+    obj.print();
+  }
 }
