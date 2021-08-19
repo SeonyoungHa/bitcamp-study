@@ -82,7 +82,7 @@ public class MenuGroup extends Menu {
 		breadCrumb.push(this);
 
 		while (true) {
-			System.out.printf("\n[%s]\n", this.title);
+			System.out.printf("\n[%s]\n", getBreadCrumb());
 			for (int i = 0; i < this.size; i++) {
 				System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
 			}
@@ -93,6 +93,8 @@ public class MenuGroup extends Menu {
 
 			int menuNo = Prompt.inputInt("선택> ");
 			if (menuNo == 0 && !disablePrevMenu) {
+				// 현재 메뉴에서 나갈 때 스택에서 제거한다.
+				breadCrumb.pop();
 				return;
 			}
 
@@ -103,6 +105,20 @@ public class MenuGroup extends Menu {
 
 			this.childs[menuNo - 1].execute();
 		}
+	}
+
+	private String getBreadCrumb() {
+		String path = "";
+
+		for (int i = 0; i < breadCrumb.size(); i++) {
+			if (path.length() > 0) {
+				path += " / ";
+			}
+			path += (Menu) breadCrumb.get(i);
+			path += menu.title;
+		}
+
+		return path;
 	}
 
 }
