@@ -1,11 +1,10 @@
 package com.eomcs.pms.handler;
 
-public class ArrayList implements List {
+public class ArrayList extends AbstractList {
 
   static final int MAX_LENGTH = 5;
 
   Object[] list = new Object[MAX_LENGTH];
-  int size = 0;
 
   public void add(Object obj) {
     if (size == list.length) {
@@ -48,5 +47,4 @@ public class ArrayList implements List {
     }
     return -1;
   }
-
 }
