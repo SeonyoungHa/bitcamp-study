@@ -1,6 +1,6 @@
 package com.eomcs.util;
 
-import com.eomcs.pms.handler.AbstractList;
+import java.lang.reflect.Array;
 
 public class LinkedList<E> extends AbstractList<E> {
 
@@ -16,9 +16,10 @@ public class LinkedList<E> extends AbstractList<E> {
   Node<E> head;
   Node<E> tail;
 
+  @Override
   public void add(E item) {
     // 새 노드를 만든다. 생성자를 호출할 때, 노드에 담을 Board 객체 주소를 넘긴다. 
-    Node<E> node = new Node<E>(item);
+    Node<E> node = new Node<>(item);
 
     if (head == null) {
       tail = head = node;
@@ -48,7 +49,7 @@ public class LinkedList<E> extends AbstractList<E> {
   }
 
   @Override
-  public boolean remove(Object item) {
+  public boolean remove(E item) {
     Node<E> node = head;
     Node<E> prev = null;
 
@@ -133,6 +134,26 @@ public class LinkedList<E> extends AbstractList<E> {
 
     return null;
   }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public E[] toArray(E[] arr) {
+    E[] temp = null;
+
+    if (arr.length >= this.size) { 
+      temp = arr;
+    } else {
+      temp = (E[]) Array.newInstance(arr.getClass().getComponentType(), this.size);
+    }
+
+    Node<E> node = head;
+    for (int i = 0; i < this.size; i++) {
+      temp[i] = node.item;
+      node = node.next;
+    }
+    return temp; 
+  }
+
 }
 
 
