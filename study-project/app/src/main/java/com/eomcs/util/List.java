@@ -1,12 +1,12 @@
 package com.eomcs.util;
 
-public interface List {
-  void add(Object item);
+public interface List<E> {
+  void add(E item);
   Object[] toArray();
-  boolean remove(Object obj);
+  boolean remove(E obj);
   int size();
-  Object get(int index);
-  Object remove(int index);
+  E get(int index);
+  E remove(int index);
 }
 
 
