@@ -83,21 +83,32 @@ public class ArrayList<E> extends AbstractList<E> {
     return deleted; // 삭제한 항목 리턴
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public <T> T[] toArray(T[] arr) {
-    // 다음과 같이 제네릭을 적용한 배열 인스턴스는 생성할 수 없다.
-    //    T [] temp = new Object[this.size]; // 컴파일 오류!
+  public E[] toArray(E[] arr) {
 
-    // 해결책?
-    // => 배열을 만들어 주는 클래스의 도움을 받아야 한다.
-
-    // 1) 파라미터로 받은 배열이 현재 목록에 있는 값을 담을 만큼 충분히 크다면,
     if (arr.length >= this.size) {
+      // 1) 파라미터로 받은 배열이 현재 목록에 있는 값을 담을 만큼 충분히 크다면,
       // 현재 목록에 있는 값을 파라미터로 받은 배열에 복사한다.
+      //
+      // 배열을 복사할 때 자바에서 제공하는 클래스를 사용하면
+      // 반복문을 작성할 필요 없이 보다 쉽게 복사할 수 있다.
       // => System.arraycopy(원래배열, 복사시작인덱스, 값을받을배열, 복사시작인덱스, 복사할개수)
       System.arraycopy(this.list, 0, arr, 0, this.size);
+      return arr; // 파라미터로 받은 배열을 그대로 리턴한다.
+
+    } else {
+      // 2) 파라미터로 받은 배열이 현재 목록에 들어 있는 값을 담을 만큼 크지 않다면,
+      // 새 배열을 만들어 복사한다.
+      //
+      // 그러나 다음과 같이 제네릭을 적용한 배열 인스턴스는 생성할 수 없다.
+      //    E [] temp = new E[this.size]; // 컴파일 오류!
+      // => Arrays.copyOf(원래배열, 복사할개수, 새로만들배열의타입);
     }
-    T[] temp = Arrays.copyOf(arr, MAX_LENGTH, null);
+    return (E[]) Arrays.copyOf(
+        this.list, // 원래 배열
+        this.size, // 복사할 개수. 현재 배열에 들어 있는 값들의 개수
+        this.list.getClass());
   }
 }
 
