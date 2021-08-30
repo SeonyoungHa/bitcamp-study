@@ -92,7 +92,7 @@ public class App {
     MenuGroup memberMenu = new MenuGroup("회원");
     mainMenuGroup.add(memberMenu);
 
-    memberMenu.add(new Menu("등록") {
+    memberMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       public void execute() {
         memberHandler.add(); 
       }});
@@ -104,11 +104,11 @@ public class App {
       public void execute() {
         memberHandler.detail(); 
       }});
-    memberMenu.add(new Menu("변경") {
+    memberMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       public void execute() {
         memberHandler.update(); 
       }});
-    memberMenu.add(new Menu("삭제") {
+    memberMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       public void execute() {
         memberHandler.delete(); 
       }});
@@ -116,7 +116,7 @@ public class App {
     MenuGroup projectMenu = new MenuGroup("프로젝트");
     mainMenuGroup.add(projectMenu);
 
-    projectMenu.add(new Menu("등록") {
+    projectMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       public void execute() {
         projectHandler.add(); 
       }});
@@ -128,11 +128,11 @@ public class App {
       public void execute() {
         projectHandler.detail(); 
       }});
-    projectMenu.add(new Menu("변경") {
+    projectMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       public void execute() {
         projectHandler.update(); 
       }});
-    projectMenu.add(new Menu("삭제") {
+    projectMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       public void execute() {
         projectHandler.delete(); 
       }});
