@@ -24,9 +24,9 @@ public class Exam0410 {
       m(1);
     }catch (IOException e) {
 
-    } catch (SQLException e) {
+      //} catch (SQLException e) {
 
-    } catch (Exception e) {
+      //} catch (Exception e) {
 
     }
   }
