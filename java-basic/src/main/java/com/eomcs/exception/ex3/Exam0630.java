@@ -14,7 +14,6 @@ public class Exam0630 {
     // => 단 java.lang.AutoCloseable 구현체에 대해서만 가능하다!
     // => 문법
     // try (java.lang.AutoCloseable 구현체) {...}
-
     try (Scanner keyScan = new Scanner(System.in); // OK!
 
         // FileReader 클래스도 java.lang.AutoCloseable 구현체이다.

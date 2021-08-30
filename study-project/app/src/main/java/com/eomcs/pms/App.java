@@ -40,6 +40,13 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+    mainMenuGroup.add(new Menu("로그인") {
+      @Override
+      public void execute() {
+
+      }
+    });
+
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
