@@ -7,16 +7,16 @@ public abstract class Menu {
 
   String title;
 
-  boolean enableAuth;
+  int enableState;
 
   public Menu(String title) {
     this.title = title;
   }
 
 
-  public Menu(String title, boolean enableAuth) {
+  public Menu(String title, int enableState) {
     this(title);
-    this.enableAuth = enableAuth;
+    this.enableState = enableState;
   }
   public abstract void execute();
 }
