@@ -42,7 +42,7 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new Menu("로그인") {
+    mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         // 로그인 메뉴를 선택했을 때 수행할 코드를 여기에 둔다.
@@ -50,7 +50,7 @@ public class App {
       }
     });
 
-    mainMenuGroup.add(new Menu("내정보", true) {
+    mainMenuGroup.add(new Menu("내정보", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         // 내정보 메뉴를 선택했을 때 수행할 코드를 여기에 둔다.
@@ -58,7 +58,7 @@ public class App {
       }
     });
 
-    mainMenuGroup.add(new Menu("로그아웃", true) {
+    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         authHandler.logout();
@@ -68,7 +68,7 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록", true) {
+    boardMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       public void execute() {
         boardHandler.add(); 
       }});
@@ -80,11 +80,11 @@ public class App {
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu.add(new Menu("변경", true) {
+    boardMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       public void execute() {
         boardHandler.update(); 
       }});
-    boardMenu.add(new Menu("삭제", true) {
+    boardMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       public void execute() {
         boardHandler.delete(); 
       }});

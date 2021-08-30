@@ -85,12 +85,16 @@ public class MenuGroup extends Menu {
     while (true) {
       System.out.printf("\n[%s]\n", getBreadCrumb());
       for (int i = 0; i < this.size; i++) {
-        if (this.childs[i].enableAuth && AuthHandler.getLoginUser() == null) { 
-          // 로그인 여부를 따지는 메뉴인 경우
-          // 로그인이 되어 있지 않으면 해당 메뉴를 출력하지 않는다.
-          break;
+
+        if (this.childs[i].enableState == Menu.ENABLE_LOGOUT && AuthHandler.getLoginUser() != null) { 
+          // 로그인이 되어 있지 않을 때만 출력하는 메뉴인데 로그인 되어 있으면 출력하지 않는다.
+          continue;
+        }else if (this.childs[i].enableState == Menu.ENABLE_LOGIN && AuthHandler.getLoginUser() == null) {
+          //로그인이 되어 있을 때만 출력하는 메뉴 인데 로그인 되어 있지 않으면 출력하지 않는다.
+          continue;
         }
-        System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
+        // 그 외에는 출력
+        System.out.printf("%d. %-20s\n", i + 1, this.childs[i].title);
       }
 
       if (!disablePrevMenu) {

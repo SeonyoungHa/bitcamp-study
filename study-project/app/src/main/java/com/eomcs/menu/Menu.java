@@ -5,6 +5,10 @@ package com.eomcs.menu;
 // 상속해주는 용도이기 때문에 추상 클래스로 정의한다.
 public abstract class Menu {
 
+  public static final int ENABLE_ALL = 0;
+  public static final int ENABLE_LOGOUT = 1;
+  public static final int ENABLE_LOGIN = 2;
+
   String title;
 
   int enableState;
