@@ -89,7 +89,6 @@ public class App {
       public void execute() {
         boardHandler.delete(); 
       }});
-
     boardMenu.add(new Menu("검색") {
       @Override
       public void execute() {
