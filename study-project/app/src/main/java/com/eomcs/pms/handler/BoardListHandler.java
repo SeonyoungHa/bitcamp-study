@@ -5,8 +5,6 @@ import com.eomcs.pms.domain.Board;
 
 public class BoardListHandler extends AbstractBoardHandler{
 
-  List<Board> boardList;
-
   public BoardListHandler(List<Board> boardList) {
     super(boardList);
   }

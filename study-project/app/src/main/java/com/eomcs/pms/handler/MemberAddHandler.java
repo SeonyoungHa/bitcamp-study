@@ -6,11 +6,11 @@ import java.util.List;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
-public class MemberHandler {
+public class MemberAddHandler {
 
   List<Member> memberList;
 
-  public MemberHandler(List<Member> memberList) {
+  public MemberAddHandler(List<Member> memberList) {
     this.memberList = memberList;
 
     Member testUser = new Member();
