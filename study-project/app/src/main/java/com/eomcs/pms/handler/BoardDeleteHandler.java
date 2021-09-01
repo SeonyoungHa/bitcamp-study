@@ -4,12 +4,10 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardDeleteHandler {
-
-  List<Board> boardList;
+public class BoardDeleteHandler extends AbstractBoardHandler{
 
   public BoardDeleteHandler(List<Board> boardList) {
-    this.boardList = boardList;
+    super(boardList);
   }
 
   public void delete() {
@@ -37,18 +35,6 @@ public class BoardDeleteHandler {
     boardList.remove(board);
 
     System.out.println("게시글을 삭제하였습니다.");
-  }
-
-  private Board findByNo(int no) {
-    // 일부러 BoardList에 들어 있는 배열 보다 작은 배열을 넘겨준다.
-    // => 그러면 toArray()는 새 배열을 만들어 값을 저장한 후 리턴할 것이다.
-    Board[] arr = boardList.toArray(new Board[0]);
-    for (Board board : boardList) {
-      if (board.getNo() == no) {
-        return board;
-      }
-    }
-    return null;
   }
 }
 

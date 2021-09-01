@@ -5,12 +5,12 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardAddHandler {
+public class BoardAddHandler extends AbstractBoardHandler{
 
   List<Board> boardList;
 
   public BoardAddHandler(List<Board> boardList) {
-    this.boardList = boardList;
+    super(boardList);
   }
 
   public void add() {
