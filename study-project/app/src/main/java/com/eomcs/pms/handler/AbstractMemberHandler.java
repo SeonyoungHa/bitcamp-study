@@ -5,9 +5,9 @@ import java.util.List;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
-public class AbstractMemberHandler {
+public abstract class AbstractMemberHandler {
 
-  List<Member> memberList;
+  protected List<Member> memberList;
 
   public AbstractMemberHandler(List<Member> memberList) {
     this.memberList = memberList;

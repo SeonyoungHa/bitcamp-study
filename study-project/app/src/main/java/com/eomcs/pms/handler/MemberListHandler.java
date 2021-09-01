@@ -3,7 +3,7 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.pms.domain.Member;
 
-public class MemberListHandler extends AbstractMemberHandler{
+public class MemberListHandler extends AbstractMemberHandler {
 
   public MemberListHandler(List<Member> memberList) {
     super(memberList);
@@ -23,7 +23,6 @@ public class MemberListHandler extends AbstractMemberHandler{
           member.getRegisteredDate());
     }
   }
-
 }
 
 

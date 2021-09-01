@@ -4,7 +4,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardDeleteHandler extends AbstractBoardHandler{
+public class BoardDeleteHandler extends AbstractBoardHandler {
 
   public BoardDeleteHandler(List<Board> boardList) {
     super(boardList);
@@ -21,7 +21,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler{
       return;
     }
 
-    if (board.getWriter().getNo() != AuthHandler.getLoginUser().getNo()) {
+    if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

@@ -6,9 +6,9 @@ import java.util.List;
 import com.eomcs.pms.domain.Project;
 import com.eomcs.util.Prompt;
 
-public class ProjectAddHandler extends AbstractProjectHandler{
+public class ProjectAddHandler extends AbstractProjectHandler {
 
-  AbstractProjectHandler memberHandler;
+  AbstractMemberHandler memberHandler;
 
   public ProjectAddHandler(List<Project> projectList, AbstractMemberHandler memberHandler) {
     super(projectList);
@@ -59,14 +59,13 @@ public class ProjectAddHandler extends AbstractProjectHandler{
     project.setContent(Prompt.inputString("내용? "));
     project.setStartDate(Prompt.inputDate("시작일? "));
     project.setEndDate(Prompt.inputDate("종료일? "));
-    project.setOwner(AuthHandler.getLoginUser());
+    project.setOwner(AuthLoginHandler.getLoginUser());
     project.setMembers(memberHandler.promptMembers("팀원?(완료: 빈 문자열) "));
 
     projectList.add(project);
 
     System.out.println("프로젝트를 저장했습니다!");
   }
-
 }
 
 

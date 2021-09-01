@@ -4,7 +4,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Project;
 import com.eomcs.util.Prompt;
 
-public class ProjectDetailHandler extends AbstractProjectHandler{
+public class ProjectDetailHandler extends AbstractProjectHandler {
 
   public ProjectDetailHandler(List<Project> projectList) {
     super(projectList);
@@ -28,17 +28,6 @@ public class ProjectDetailHandler extends AbstractProjectHandler{
     System.out.printf("만든이: %s\n", project.getOwner().getName());
     System.out.printf("팀원: %s\n", getMemberNames(project.getMembers()));
   }
-
-  public Project findByNo(int no) {
-    for (Project project : projectList) {
-      if (project.getNo() == no) {
-        return project;
-      }
-    }
-    return null;
-  }
-
-
 }
 
 

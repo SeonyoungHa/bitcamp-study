@@ -27,7 +27,6 @@ public class MemberDetailHandler extends AbstractMemberHandler {
     System.out.printf("전화: %s\n", member.getTel());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
   }
-
 }
 
 

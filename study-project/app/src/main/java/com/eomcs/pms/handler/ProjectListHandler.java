@@ -3,7 +3,7 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.pms.domain.Project;
 
-public class ProjectListHandler {
+public class ProjectListHandler extends AbstractProjectHandler {
 
   public ProjectListHandler(List<Project> projectList) {
     super(projectList);
@@ -22,7 +22,6 @@ public class ProjectListHandler {
           getMemberNames(project.getMembers()));
     }
   }
-
 }
 
 

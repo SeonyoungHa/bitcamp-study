@@ -8,7 +8,9 @@ import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
-import com.eomcs.pms.handler.AuthHandler;
+import com.eomcs.pms.handler.AuthLoginHandler;
+import com.eomcs.pms.handler.AuthLogoutHandler;
+import com.eomcs.pms.handler.AuthUserInfoHandler;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
@@ -24,7 +26,11 @@ import com.eomcs.pms.handler.ProjectDeleteHandler;
 import com.eomcs.pms.handler.ProjectDetailHandler;
 import com.eomcs.pms.handler.ProjectListHandler;
 import com.eomcs.pms.handler.ProjectUpdateHandler;
-import com.eomcs.pms.handler.TaskHandler;
+import com.eomcs.pms.handler.TaskAddHandler;
+import com.eomcs.pms.handler.TaskDeleteHandler;
+import com.eomcs.pms.handler.TaskDetailHandler;
+import com.eomcs.pms.handler.TaskListHandler;
+import com.eomcs.pms.handler.TaskUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
@@ -44,14 +50,21 @@ public class App {
   MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
   MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList);
 
-  ProjectAddHandler projectAddHandler = new ProjectAddHandler(projectList, memberHandler);
+  ProjectAddHandler projectAddHandler = new ProjectAddHandler(projectList, memberListHandler);
   ProjectListHandler projectListHandler = new ProjectListHandler(projectList);
   ProjectDetailHandler projectDetailHandler = new ProjectDetailHandler(projectList);
-  ProjectUpdateHandler projectUpdateHandler = new ProjectUpdateHandler(projectList, memberHandler);
+  ProjectUpdateHandler projectUpdateHandler = new ProjectUpdateHandler(projectList, memberListHandler);
   ProjectDeleteHandler projectDeleteHandler = new ProjectDeleteHandler(projectList);
 
-  TaskHandler taskHandler = new TaskHandler(projectHandler);
-  AuthHandler authHandler = new AuthHandler(memberList);
+  TaskAddHandler taskAddHandler = new TaskAddHandler(projectListHandler);
+  TaskListHandler taskListHandler = new TaskListHandler(projectListHandler);
+  TaskDetailHandler taskDetailHandler = new TaskDetailHandler(projectListHandler);
+  TaskUpdateHandler taskUpdateHandler = new TaskUpdateHandler(projectListHandler);
+  TaskDeleteHandler taskDeleteHandler = new TaskDeleteHandler(projectListHandler);
+
+  AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
+  AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
+  AuthUserInfoHandler authUserInfoHandler = new AuthUserInfoHandler();
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -70,21 +83,21 @@ public class App {
     mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        authHandler.login(); 
+        authLoginHandler.login(); 
       }
     });
 
     mainMenuGroup.add(new Menu("내정보", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        authHandler.displayLoginUser(); 
+        authUserInfoHandler.displayLoginUser(); 
       }
     });
 
     mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        authHandler.logout(); 
+        authLogoutHandler.logout(); 
       }
     });
 
@@ -152,27 +165,27 @@ public class App {
     projectMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        projectHandler.add(); 
+        projectAddHandler.add(); 
       }});
     projectMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        projectHandler.list(); 
+        projectListHandler.list(); 
       }});
     projectMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        projectHandler.detail(); 
+        projectDetailHandler.detail(); 
       }});
     projectMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        projectHandler.update(); 
+        projectUpdateHandler.update(); 
       }});
     projectMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        projectHandler.delete(); 
+        projectDeleteHandler.delete(); 
       }});
 
     MenuGroup taskMenu = new MenuGroup("작업");
@@ -181,27 +194,27 @@ public class App {
     taskMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        taskHandler.add(); 
+        taskAddHandler.add(); 
       }});
     taskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        taskHandler.list(); 
+        taskListHandler.list(); 
       }});
     taskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        taskHandler.detail(); 
+        taskDetailHandler.detail(); 
       }});
     taskMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        taskHandler.update(); 
+        taskUpdateHandler.update(); 
       }});
     taskMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        taskHandler.delete(); 
+        taskDeleteHandler.delete(); 
       }});
 
 

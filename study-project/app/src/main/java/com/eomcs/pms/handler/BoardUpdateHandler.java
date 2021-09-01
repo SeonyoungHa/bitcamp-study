@@ -4,12 +4,11 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardUpdateHandler extends AbstractBoardHandler{
+public class BoardUpdateHandler extends AbstractBoardHandler {
 
   public BoardUpdateHandler(List<Board> boardList) {
     super(boardList);
   }
-
 
   public void update() {
     System.out.println("[게시글 변경]");
@@ -22,7 +21,7 @@ public class BoardUpdateHandler extends AbstractBoardHandler{
       return;
     }
 
-    if (board.getWriter().getNo() != AuthHandler.getLoginUser().getNo()) {
+    if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
@@ -40,7 +39,6 @@ public class BoardUpdateHandler extends AbstractBoardHandler{
     board.setContent(content);
     System.out.println("게시글을 변경하였습니다.");
   }
-
 }
 
 

@@ -4,9 +4,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
-public class MemberUpdateHandler extends AbstractMemberHandler{
-
-  List<Member> memberList;
+public class MemberUpdateHandler extends AbstractMemberHandler {
 
   public MemberUpdateHandler(List<Member> memberList) {
     super(memberList);

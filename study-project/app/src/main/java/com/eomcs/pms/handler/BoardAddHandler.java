@@ -5,9 +5,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardAddHandler extends AbstractBoardHandler{
-
-  List<Board> boardList;
+public class BoardAddHandler extends AbstractBoardHandler {
 
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
@@ -22,12 +20,11 @@ public class BoardAddHandler extends AbstractBoardHandler{
     board.setTitle(Prompt.inputString("제목? "));
     board.setContent(Prompt.inputString("내용? "));
 
-    board.setWriter(AuthHandler.getLoginUser());
+    board.setWriter(AuthLoginHandler.getLoginUser());
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     boardList.add(board);
   }
-
 }
 
 
