@@ -43,15 +43,6 @@ public class MemberUpdateHandler extends AbstractMemberHandler{
 
     System.out.println("회원을 변경하였습니다.");
   }
-
-  private Member findByNo(int no) {
-    for (Member member : memberList) {
-      if (member.getNo() == no) {
-        return member;
-      }
-    }
-    return null;
-  }
 }
 
 
