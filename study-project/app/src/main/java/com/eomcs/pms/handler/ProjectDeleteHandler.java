@@ -7,11 +7,11 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
 import com.eomcs.util.Prompt;
 
-public class ProjectHandler {
+public class ProjectDeleteHandler {
 
   List<Project> projectList;
-super(projectList)
-}
+  MemberHandler memberHandler;
+
   public ProjectHandler(List<Project> projectList, MemberHandler memberHandler) {
     this.projectList = projectList;
     this.memberHandler = memberHandler;
