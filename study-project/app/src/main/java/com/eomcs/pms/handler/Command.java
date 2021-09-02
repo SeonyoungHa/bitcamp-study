@@ -1,5 +1,5 @@
 package com.eomcs.pms.handler;
 
-public class Command {
-
+public interface Command {
+  void execute();
 }
