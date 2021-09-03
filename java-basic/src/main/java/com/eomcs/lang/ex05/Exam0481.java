@@ -14,11 +14,28 @@ public class Exam0481 {
     int menu2 = GENERAL; // 일반으로 로그인된 사용자만 접근 가능한 메뉴
     int menu3 = ADMIN;    // 관리자로 로그인된 사용자만 접근 가능한 메뉴
     int menu4 = LOGOUT | GENERAL | ADMIN; //로그아웃 되었든, 일반으로 로그인 되었든, 관리자로 로그인 되었든 모두 접근 가능한 메뉴
+    int menu5 = GENERAL | ADMIN; //로그인한 사용자만 접근 가능한 메뉴
 
     // 3) 접근 테스트
     // => menu1이 로그아웃 상태에서 접근 가능한 것인지 검사한다.
     System.out.println((menu2 & LOGOUT) > 0);
     System.out.println((menu2 & GENERAL) > 0);
     System.out.println((menu2 & ADMIN) > 0);
+    System.out.println("--------------------------------------------");
+
+    System.out.println((menu3 & LOGOUT) > 0);
+    System.out.println((menu3 & GENERAL) > 0);
+    System.out.println((menu3 & ADMIN) > 0);
+    System.out.println("--------------------------------------------");
+
+    System.out.println((menu4 & LOGOUT) > 0);
+    System.out.println((menu4 & GENERAL) > 0);
+    System.out.println((menu4 & ADMIN) > 0);
+    System.out.println("--------------------------------------------");
+
+    System.out.println((menu5 & LOGOUT) > 0);
+    System.out.println((menu5 & GENERAL) > 0);
+    System.out.println((menu5 & ADMIN) > 0);
+
   }
 }
