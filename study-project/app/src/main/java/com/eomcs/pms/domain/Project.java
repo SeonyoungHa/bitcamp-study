@@ -1,12 +1,12 @@
 package com.eomcs.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import com.eomcs.csv.CsvValue;
 
 @SuppressWarnings("serial")
-public class Project implements Serializable {
+public class Project implements CsvValue {
 
   private int no;
   private String title;
@@ -23,6 +23,67 @@ public class Project implements Serializable {
         + startDate + ", endDate=" + endDate + ", owner=" + owner + ", members=" + members
         + ", tasks=" + tasks + "]";
   }
+
+  // 다음 메서드는 CsvValue 규칙에 따라 정의한 메서드이다.
+  @Override
+  public String toCsvString() {
+    // 프로젝트 정보를 CSV로 출력할 때 멤버 정보와 작업 정보를 포함한다.
+    StringBuilder strBuilder = new StringBuilder();
+
+    // 1) 프로젝트 기본 정보를 저장한다.
+    strBuilder.append(String.format("%d,%s,%s,%s,%s,%d,%s,",
+        this.getNo(),
+        this.getTitle(),
+        this.getContent(),
+        this.getStartDate(),
+        this.getEndDate(),
+        this.getOwner().getNo(),
+        this.getOwner().getName()));
+
+    // 2) 프로젝트 멤버 정보를 저장한다.
+    // => 프로젝트 멤버의 수를 저장한다. 
+    strBuilder.append(String.format("%d", this.getMembers().size())); 
+
+    // => 프로젝트 멤버들의 정보를 저장한다.
+    for (Member m : this.getMembers()) {
+      strBuilder.append(String.format("%d,%s,", m.getNo(), m.getName()));
+    }
+
+    // 3) 프로젝트 작업 정보를 저장한다.
+    // = > 작업의 수를 저장한다.  
+    strBuilder.append(String.format("%d", this.getTasks().size()));
+
+    // = > 작업들의 정보를 저장한다. 
+    for (Task t : this.getTasks()) {
+      strBuilder.append(String.format("%d,%s,%s,%d,%d,%s,",
+          t.getNo(),
+          t.getContent(),
+          t.getDeadline(),
+          t.getStatus(),
+          t.getOwner().getNo(),
+          t.getOwner().getName()));
+    }
+
+    return strBuilder.toString();
+  }
+
+  // 다음 메서드는 파라미터로 받은 CSV 문자열에서 값을 추출하여
+  // Board 객체의 각 필드에 저장한다.
+
+  @Override
+  public void loadCsv(String csv) {
+    String[] values = csv.split(",");
+
+    // CSV 문자열에서 추출한 값을 객체의 필드에 저장한다.
+    //    Board b = new Board();
+    //    this.setNo(Integer.valueOf(values[0]));
+    //    this.setName(values[1]);
+    //    this.setEmail(values[2]);
+    //    this.setPassword(values[3]);
+    //    this.setPhoto(values[5]);
+    //    this.setRegisteredDate(Date.valueOf(values[6]));
+  }
+
   public int getNo() {
     return no;
   }

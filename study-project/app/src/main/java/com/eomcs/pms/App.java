@@ -118,13 +118,16 @@ public class App {
   void service() {
     // 여러 타입의 CSV 데이터를 로딩하는 메서드
     loadObjects("board.csv", boardList, Board.class);
-    loadObjects("member.csv", boardList, Board.class);
+    loadObjects("member.csv", memberList, Board.class);
+    loadObjects("member.csv", projectList, Board.class);
 
     createMainMenu().execute();
     Prompt.close();
 
     // 여러 타입의 객체를 CSV 데이터로 출력하는 메서드
     saveObjects("board.csv", boardList);
+    saveObjects("member.csv", memberList);
+    saveObjects("project.csv", projectList);
 
   }
 
@@ -133,7 +136,7 @@ public class App {
   // 단, CsvValue 규칙에 따라 만든 도메인 객체여야 한다.
   // => 어찌되었든 다음과 같이 제네릭 문법을 사용하면 한개의 메서드로 
   // 여러 타입의 객체를 다룰 수 있어서 유지보수하기 편하다.
-  private <E extends CsvValue> void loadOjects(
+  private <E extends CsvValue> void loadObjects(
       String filepath, // 데이터를 읽어 올 파일 경로 
       List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록
       Class<E> domainType // 생성할 객체의 타입
