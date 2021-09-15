@@ -17,7 +17,7 @@ public class Exam0513 {
     byte[] bytes = str.getBytes("UTF-16LE"); // UCS2 ==> UTF-16LE
 
     for (byte b : bytes) {
-      System.out.printf("%x ", b);
+      System.out.printf("%02x ", b);
     }
     System.out.println();
 
