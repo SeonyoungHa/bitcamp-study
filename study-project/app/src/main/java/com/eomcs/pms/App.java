@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.eomcs.csv.CsvValue;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
@@ -122,7 +123,7 @@ public class App {
     Prompt.close();
 
     // 게시글을 파일에 출력하는 코드를 별도의 메서드로 분리한다.
-    saveBoards();
+    saveObjects("board.csv", boardList);
 
   }
 
@@ -143,14 +144,13 @@ public class App {
     }
   }
 
-  private void saveBoards() {
+  private <E> void saveObjects(String filepath, List<? extends CsvValue> list) {
     // 게시글 데이터를 CSV 형식으로 출력한다.
     try (PrintWriter out = new PrintWriter(
         new BufferedWriter(
-            new FileWriter("board.csv", Charset.forName("UTF-8"))))) {
-      for (Board board : boardList) {
-        // 게시글 데이터를 갖고 있는 객체가 CSV 문자열을 만들도록 책임을 위임한다.
-        out.println(board.toCsvString());
+            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
+      for (E obj : list) {
+        out.println(obj.toCsvString());
       }
       System.out.println("게시글 데이터 출력 완료!");
 
