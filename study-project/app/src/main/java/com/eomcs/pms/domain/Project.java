@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.eomcs.csv.CsvValue;
 
-@SuppressWarnings("serial")
 public class Project implements CsvValue {
 
   private int no;
@@ -14,7 +13,7 @@ public class Project implements CsvValue {
   private Date startDate;
   private Date endDate;
   private Member owner;
-  private List<Member> members;
+  private List<Member> members = new ArrayList<>();
   private List<Task> tasks = new ArrayList<>();
 
   @Override
@@ -74,19 +73,50 @@ public class Project implements CsvValue {
   public void loadCsv(String csv) {
     String[] values = csv.split(",");
 
-    // CSV 문자열에서 추출한 값을 객체의 필드에 저장한다.
-    Board b = new Board();
+    // 1) 프로젝트 기본 정보 로딩
     this.setNo(Integer.valueOf(values[0]));
     this.setTitle(values[1]);
     this.setContent(values[2]);
     this.setStartDate(Date.valueOf(values[3]));
     this.setEndDate(Date.valueOf(values[4]));
 
+    // 2) 프로젝트 관리자 정보 로딩
     Member owner = new Member();
     owner.setNo(Integer.valueOf(values[5]));
     owner.setName(values[6]);
 
     this.setOwner(owner);
+
+    int lastIndex = 0;
+    // 3) 프로젝트 멤버 정보 로딩
+    // = > 프로젝트 멤버가 몇 명인지 읽어 온다.
+    int memberSize = Integer.valueOf(values[7]);
+
+    for (int i = 0, offset = 8; i < memberSize; i++, offset += 2) {
+      // = > 파일에서 멤버 번호와 이름을 로딩한다.
+      Member m = new Member();
+      m.setNo(Integer.valueOf(values[offset]));
+      m.setName(values[offset + 1]);
+
+      // = > 프로젝트에 멤버를 추가한다.
+      this.getMembers().add(m);
+
+      // => 작업 데이터를 읽을 때 사용할 마지막 인덱스
+      lastIndex = offset + 1;
+    }
+
+    // 4) 작업 로딩
+    // => 작업의 개수를 읽어 온다.
+    int taskSize = Integer.valueOf(values[lastIndex + 1]);
+
+    for (int i = 0, offset = lastIndex + 2; i < taskSize; i++, offset += 6) {
+      // = > 파일에서 작업 데이터를 로딩한다.
+      Task t = new Task();
+      t.setNo(Integer.valueOf(values[offset]));
+      t.setContent(values[offset + 1]);
+      t.setDeadline(Date.valueOf(values[offset + 2]));
+      t.setStatus(Integer.valueOf(values[offset + 3]));
+    }
   }
 
   public int getNo() {
