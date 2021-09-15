@@ -116,25 +116,44 @@ public class App {
   }
 
   void service() {
-    // 파일에서 게시글 데이터를 로딩하는 코드를 별도의 메서드로 분리한다.
-    loadBords();
+    // 여러 타입의 CSV 데이터를 로딩하는 메서드
+    loadObjects("board.csv", boardList, Board.class);
+    loadObjects("member.csv", boardList, Board.class);
 
     createMainMenu().execute();
     Prompt.close();
 
-    // 게시글을 파일에 출력하는 코드를 별도의 메서드로 분리한다.
+    // 여러 타입의 객체를 CSV 데이터로 출력하는 메서드
     saveObjects("board.csv", boardList);
 
   }
 
-  private void loadBords() {
+  // 이전의 loadBoards()는 오직 Board 객체의 데이터만 로딩할 수 있었다.
+  // 다음의 loadObjects()는 Board 타입 외에 다른 타입의 객체도 로딩 할 수 있다.
+  // 단, CsvValue 규칙에 따라 만든 도메인 객체여야 한다.
+  // => 어찌되었든 다음과 같이 제네릭 문법을 사용하면 한개의 메서드로 
+  // 여러 타입의 객체를 다룰 수 있어서 유지보수하기 편하다.
+  private <E extends CsvValue> void loadOjects(
+      String filepath, // 데이터를 읽어 올 파일 경로 
+      List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록
+      Class<E> domainType // 생성할 객체의 타입
+      ) {
+
     // CSV 형식으로 저장된 게시글 데이터를 파일에서 읽어 객체에 담는다. 
     try (BufferedReader in = new BufferedReader(
-        new FileReader("board.csv", Charset.forName("UTF-8")))) {
+        new FileReader(filepath, Charset.forName("UTF-8")))) {
 
       String csvStr = null;
       while ((csvStr = in.readLine()) != null) {
-        boardList.add( Board.valueOfCsv(csvStr));
+
+        // 1) CSV 값을 저장할 객체를 준비한다.
+        E obj = domainType.getConstructor().newInstance();
+
+        // 2) 생성한 객체에 대해 CSV 값을 전달하여 필드에 저장시킨다.
+        obj.loadCsv(csvStr);
+
+        // 3) CSV 값으로 만든 객체를 목록에 추가한다.
+        list.add(obj);
       }
 
       System.out.println("게시글 데이터 로딩 완료!");
@@ -144,12 +163,21 @@ public class App {
     }
   }
 
+  // 이전의 saveBoards()는 오직 Board 객체의 데이터만 CSV 형식으로 출력할 수 있었다.
+  // 다음의 saveObjects()는 Board 타입 외에 다른 타입의 객체도 CSV 형식으로 출력할 수 있다.
+  // 단, List 에 저장되어 있는 객체가 CsvValue 규칙에 따라 만든 객체여야 한다.
+  // => 어찌되었든 다음과 같이 제네릭 문법을 사용하면 한개의 메서드로 
+  // 여러 타입의 객체를 다룰 수 있어서 유지보수하기 편하다.
   private <E> void saveObjects(String filepath, List<? extends CsvValue> list) {
     // 게시글 데이터를 CSV 형식으로 출력한다.
     try (PrintWriter out = new PrintWriter(
         new BufferedWriter(
             new FileWriter(filepath, Charset.forName("UTF-8"))))) {
-      for (E obj : list) {
+
+      // 파라미터 list에 들어 있는 객체는 최소한  CvsValue 라는 인터페이스를 구현한 객체이다.
+      for (CsvValue obj : list) {
+        // 따라서 list 객체에서 꺼낸 값은 CsvValue 타입의 객체이다.
+        // 그래서 다음과 같이 CsvValue 에 선언된 메서드를 호출할 수 있는 것이다.
         out.println(obj.toCsvString());
       }
       System.out.println("게시글 데이터 출력 완료!");
