@@ -118,8 +118,8 @@ public class App {
   void service() {
     // 여러 타입의 CSV 데이터를 로딩하는 메서드
     loadObjects("board.csv", boardList, Board.class);
-    loadObjects("member.csv", memberList, Board.class);
-    loadObjects("member.csv", projectList, Board.class);
+    loadObjects("member.csv", memberList, Member.class);
+    loadObjects("project.csv", projectList, Project.class);
 
     createMainMenu().execute();
     Prompt.close();
@@ -159,10 +159,10 @@ public class App {
         list.add(obj);
       }
 
-      System.out.println("게시글 데이터 로딩 완료!");
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("게시글 데이터 로딩 오류!");
+      System.out.printf("%s 게시글 데이터 로딩 오류!\n", filepath);
     }
   }
 
@@ -183,10 +183,10 @@ public class App {
         // 그래서 다음과 같이 CsvValue 에 선언된 메서드를 호출할 수 있는 것이다.
         out.println(obj.toCsvString());
       }
-      System.out.println("게시글 데이터 출력 완료!");
+      System.out.printf("%s 데이터 출력 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("게시글 데이터 출력 오류!");
+      System.out.printf("%s 데이터 출력 오류!", filepath);
     }
   }
 
