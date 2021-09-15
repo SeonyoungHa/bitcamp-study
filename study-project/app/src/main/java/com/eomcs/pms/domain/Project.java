@@ -75,13 +75,18 @@ public class Project implements CsvValue {
     String[] values = csv.split(",");
 
     // CSV 문자열에서 추출한 값을 객체의 필드에 저장한다.
-    //    Board b = new Board();
-    //    this.setNo(Integer.valueOf(values[0]));
-    //    this.setName(values[1]);
-    //    this.setEmail(values[2]);
-    //    this.setPassword(values[3]);
-    //    this.setPhoto(values[5]);
-    //    this.setRegisteredDate(Date.valueOf(values[6]));
+    Board b = new Board();
+    this.setNo(Integer.valueOf(values[0]));
+    this.setTitle(values[1]);
+    this.setContent(values[2]);
+    this.setStartDate(Date.valueOf(values[3]));
+    this.setEndDate(Date.valueOf(values[4]));
+
+    Member owner = new Member();
+    owner.setNo(Integer.valueOf(values[5]));
+    owner.setName(values[6]);
+
+    this.setOwner(owner);
   }
 
   public int getNo() {
