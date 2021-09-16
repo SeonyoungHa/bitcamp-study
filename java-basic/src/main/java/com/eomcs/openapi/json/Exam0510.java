@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
-public class Exam5110 {
+public class Exam0510 {
 	public static void main(String[] args) {
 
 		// 1) 객체 준비
