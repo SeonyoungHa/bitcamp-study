@@ -3,10 +3,13 @@ package com.eomcs.pms;
 import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_GENERAL;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -113,58 +116,66 @@ public class App {
   }
 
   void service() {
-    loadBoards();
+
+    // CSV 형식으로 저장된 게시글 데이터를 파일에서 읽어 객체에 담는다. 
+    try (BufferedReader in = new BufferedReader(
+        new FileReader("board.csv", Charset.forName("UTF-8")))) {
+
+      String csvStr = null;
+      while ((csvStr = in.readLine()) != null) {
+
+        // 1) 한 줄의 문자열을 콤마(,)로 분리한다.
+        String[] values = csvStr.split(",");
+
+        // 2) 콤마로 분리한 값을 Board 객체에 담는다.
+        Board b = new Board();
+        b.setNo(Integer.valueOf(values[0]));
+        b.setTitle(values[1]);
+        b.setContent(values[2]);
+        b.setRegisteredDate(Date.valueOf(values[3]));
+        b.setViewCount(Integer.valueOf(values[4]));
+        b.setLike(Integer.valueOf(values[5]));
+
+        // 3) 게시글을 작성한 회원 정보를 Member 객체에 담는다.
+        Member m = new Member();
+        m.setNo(Integer.valueOf(values[6]));
+        m.setName(values[7]);
+
+        // 4) Member 객체를 Board 객체의 작성자 필드에 저장한다.
+        b.setWriter(m);
+
+        // 5) 게시글 객체를 boardList 에 저장한다.
+        boardList.add(b);
+      }
+
+      System.out.println("게시글 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터 로딩 오류!");
+    }
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveBoards();
-  }
-
-  private void loadBoards() {
-    try (
-        // 파일에서 바이트를 읽어 오는 일을 하는 객체
-        FileInputStream in = new FileInputStream("board.data2");
-
-        // 직렬화 방식으로 출력된 바이트를 읽어 객체의 필드 값으로 복원하는 일을 하는 객체
-        ObjectInputStream in2 = new ObjectInputStream(in)) {
-
-      // 게시글 개수를 먼저 읽는다.
-      int size = in2.readInt();
-
-      for (int i = 0; i < size; i++) {
-        boardList.add((Board)in2.readObject()); 
-        // writeObject() 로 출력한 바이트 데이터를 읽어서 원래 객체로 복원해 준다.
-      }
-
-      System.out.println("게시글 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveBoards() {
-    try (
-        // 파일에 바이트를 출력하는 객체
-        FileOutputStream out = new FileOutputStream("board.data2");
-
-        // 출력할 객체의 모든 필드 값을 바이트 배열에 담는 일을 하는 객체
-        ObjectOutputStream out2 = new ObjectOutputStream(out)) {
-
-      // 출력할 게시글 개수를 먼저 저장한다.
-      out2.writeInt(boardList.size());
-
+    // 게시글 데이터를 CSV 형식으로 출력한다.
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter("board.csv", Charset.forName("UTF-8"))))) {
       for (Board board : boardList) {
-        out2.writeObject(board);
+        out.printf("%d,%s,%s,%s,%d,%d,%d,%s\n",
+            board.getNo(),
+            board.getTitle(),
+            board.getContent(),
+            board.getRegisteredDate(),
+            board.getViewCount(),
+            board.getLike(),
+            board.getWriter().getNo(),
+            board.getWriter().getName());
       }
-
-      System.out.println("게시글 저장 완료!");
+      System.out.println("게시글 데이터 출력 완료!");
 
     } catch (Exception e) {
-      System.out.println("게시글을 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
+      System.out.println("게시글 데이터 출력 오류!");
     }
   }
 

@@ -122,7 +122,7 @@ public class App {
 
       String csvStr = null;
       while ((csvStr = in.readLine()) != null) {
-        boardList.add( Board.valueOfCsv(csvStr));
+        boardList.add(Board.valueOfCsv(csvStr));
       }
 
       System.out.println("게시글 데이터 로딩 완료!");
@@ -216,6 +216,7 @@ public class App {
     return adminMenu;
   }
 }
+
 
 
 

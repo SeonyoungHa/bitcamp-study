@@ -116,7 +116,7 @@ public class App {
 
   void service() {
     // 파일에서 게시글 데이터를 로딩하는 코드를 별도의 메서드로 분리한다.
-    loadBords();
+    loadBoards();
 
     createMainMenu().execute();
     Prompt.close();
@@ -126,14 +126,14 @@ public class App {
 
   }
 
-  private void loadBords() {
+  private void loadBoards() {
     // CSV 형식으로 저장된 게시글 데이터를 파일에서 읽어 객체에 담는다. 
     try (BufferedReader in = new BufferedReader(
         new FileReader("board.csv", Charset.forName("UTF-8")))) {
 
       String csvStr = null;
       while ((csvStr = in.readLine()) != null) {
-        boardList.add( Board.valueOfCsv(csvStr));
+        boardList.add(Board.valueOfCsv(csvStr));
       }
 
       System.out.println("게시글 데이터 로딩 완료!");
@@ -226,6 +226,7 @@ public class App {
     return adminMenu;
   }
 }
+
 
 
 
