@@ -48,8 +48,8 @@ import com.eomcs.pms.handler.TaskDetailHandler;
 import com.eomcs.pms.handler.TaskListHandler;
 import com.eomcs.pms.handler.TaskUpdateHandler;
 import com.eomcs.util.Prompt;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 public class App {
@@ -90,10 +90,8 @@ public class App {
   public App() {
     commandMap.put("/board/add", new BoardAddHandler(boardList));
     commandMap.put("/board/list", new BoardListHandler(boardList));
-
-    BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList);
-    //        commandMap.put("/board/update", new BoardUpdateHandler);
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardUpdateHandler));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
