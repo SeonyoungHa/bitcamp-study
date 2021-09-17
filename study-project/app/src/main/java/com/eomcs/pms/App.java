@@ -48,8 +48,8 @@ import com.eomcs.pms.handler.TaskDetailHandler;
 import com.eomcs.pms.handler.TaskListHandler;
 import com.eomcs.pms.handler.TaskUpdateHandler;
 import com.eomcs.util.Prompt;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 public class App {
@@ -92,9 +92,11 @@ public class App {
     commandMap.put("/board/list", new BoardListHandler(boardList));
 
     BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList);
-    //        commandMap.put("/board/update", new BoardUpdateHandler);
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardUpdateHandler));
-    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+    BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList);
+    //    commandMap.put("/board/update", boardUpdateHandler);
+    //    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+    commandMap.put("/board/detail", 
+        new BoardDetailHandler(boardList, boardUpdateHandler, boardDeleteHandler));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
@@ -201,8 +203,8 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/board/update"));
-    boardMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/board/delete"));
+    //    boardMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/board/update"));
+    //    boardMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
     return boardMenu;
   }
