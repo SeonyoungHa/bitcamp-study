@@ -43,7 +43,6 @@ import com.eomcs.pms.handler.ProjectDetailHandler;
 import com.eomcs.pms.handler.ProjectListHandler;
 import com.eomcs.pms.handler.ProjectPrompt;
 import com.eomcs.pms.handler.ProjectUpdateHandler;
-import com.eomcs.pms.handler.RequestDispatcher;
 import com.eomcs.pms.handler.TaskAddHandler;
 import com.eomcs.pms.handler.TaskDeleteHandler;
 import com.eomcs.pms.handler.TaskDetailHandler;
@@ -60,9 +59,6 @@ public class App {
   List<Project> projectList = new ArrayList<>();
 
   HashMap<String,Command> commandMap = new HashMap<>();
-
-  // 특정 핸드러를 찾아 시행하는 일을 하는 객체
-  RequestDispatcher requestDispatcher;
 
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
   ProjectPrompt projectPrompt = new ProjectPrompt(projectList);
@@ -84,7 +80,7 @@ public class App {
     public void execute() {
       Command command = commandMap.get(menuId);
       try {
-        command.execute(new CommandRequest());
+        command.execute(new CommandRequest(commandMap));
       } catch (Exception e) {
         System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
         e.printStackTrace();
@@ -98,15 +94,12 @@ public class App {
   }
 
   public App() {
+
     commandMap.put("/board/add", new BoardAddHandler(boardList));
     commandMap.put("/board/list", new BoardListHandler(boardList));
-
-    BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList);
-    BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList);
-    //    commandMap.put("/board/update", boardUpdateHandler);
-    //    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
-    commandMap.put("/board/detail", 
-        new BoardDetailHandler(boardList, boardUpdateHandler, boardDeleteHandler));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardList));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
