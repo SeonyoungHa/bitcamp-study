@@ -30,6 +30,7 @@ import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.Command;
+import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.MemberAddHandler;
 import com.eomcs.pms.handler.MemberDeleteHandler;
 import com.eomcs.pms.handler.MemberDetailHandler;
@@ -42,6 +43,7 @@ import com.eomcs.pms.handler.ProjectDetailHandler;
 import com.eomcs.pms.handler.ProjectListHandler;
 import com.eomcs.pms.handler.ProjectPrompt;
 import com.eomcs.pms.handler.ProjectUpdateHandler;
+import com.eomcs.pms.handler.RequestDispatcher;
 import com.eomcs.pms.handler.TaskAddHandler;
 import com.eomcs.pms.handler.TaskDeleteHandler;
 import com.eomcs.pms.handler.TaskDetailHandler;
@@ -58,6 +60,9 @@ public class App {
   List<Project> projectList = new ArrayList<>();
 
   HashMap<String,Command> commandMap = new HashMap<>();
+
+  // 특정 핸드러를 찾아 시행하는 일을 하는 객체
+  RequestDispatcher requestDispatcher;
 
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
   ProjectPrompt projectPrompt = new ProjectPrompt(projectList);
@@ -78,7 +83,12 @@ public class App {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest());
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -152,11 +162,14 @@ public class App {
       }
 
       // StringBuilder로 읽어 온 JSON 문자열을 객체로 바꾼다.
+
+
+      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
+
       Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
       Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
 
-      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
-      list.addAll(collection);
+      list.addAll(collection); 
 
       System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
