@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -126,6 +127,12 @@ public class App {
   }
 
   void service() {
+
+    System.out.println("************************************");
+    System.out.println("* 미니 프로젝트 관리 시스템 ver1.0 *");
+    System.out.println("*       (C)Copyright Bitcamp       *");
+    System.out.println("************************************");
+
     loadObjects("board.json", boardList, Board.class);
     loadObjects("member.json", memberList, Member.class);
     loadObjects("project.json", projectList, Project.class);
@@ -136,6 +143,11 @@ public class App {
     saveObjects("board.json", boardList);
     saveObjects("member.json", memberList);
     saveObjects("project.json", projectList);
+
+    System.out.println("************************************");
+    System.out.println("*  미니 프로젝트 관리시스템 종료!  *");
+    System.out.printf("*    마직막 실행일 : %s    *\n", new Date(System.currentTimeMillis()));
+    System.out.println("************************************");
   }
 
   // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
