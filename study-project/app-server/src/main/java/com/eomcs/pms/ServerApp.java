@@ -5,6 +5,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Date;
+import java.util.HashMap;
+import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
+import com.google.gson.Gson;
 
 public class ServerApp {
 
@@ -30,10 +35,17 @@ public class ServerApp {
         out.println("goodbye");
         out.flush();
         break;
-      }
 
-      out.println(command);
-      out.flush();
+      } else if (command.equals("/board/add")) {
+        addBoard(out, in);
+
+      }else if (command.equals("/board/detail")) {
+        detailBoard(out, in);
+      }
+      else {
+        out.println(command);
+        out.flush();
+      }
     }
 
     System.out.println("4) 클라이언트와의 접속을 끊음");
@@ -45,6 +57,40 @@ public class ServerApp {
     serverSocket.close(); // 더 이상 클라이언트의 접속을 수용하지 않는다.
   }
 
+  private static void addBoard(PrintWriter out, BufferedReader in) throws Exception {
+    String jsonStr = in.readLine();
+
+    Board board = new Gson().fromJson(jsonStr, Board.class);
+
+    System.out.println(board);
+
+    out.println("success");
+    out.flush();
+  }
+
+  private static void detailBoard(PrintWriter out, BufferedReader in) throws Exception {
+    String jsonStr = in.readLine();
+
+    @SuppressWarnings("unchecked")
+    HashMap<String,Object> map = new Gson().fromJson(jsonStr, HashMap.class);
+    System.out.println(map);
+
+    Board board = new Board();
+    board.setNo(2);
+    board.setTitle("제목1");
+    board.setContent("내용1");
+    board.setRegisteredDate(Date.valueOf("2021-1-1"));
+
+    Member m = new Member();
+    m.setNo(101);
+    m.setName("aaax");
+    m.setEmail("aaax@test.com");
+
+    board.setWriter(m);
+
+    out.println(new Gson().toJson(board));
+    out.flush();
+  }
 }
 
 
