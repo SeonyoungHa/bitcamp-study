@@ -25,10 +25,16 @@
 
 ## 실습
 
-### 1단계 - 서버와 연결한 후 메시지를 주고 받는다.
+### 1단계 - 클라이언트 연결을 기다린다.
 
-- com.eomcs.pms.ClientApp 변경
-  - 서버와 연결된 Socket 객체를 통해 입출력 스트림을 준비하여 메시지를 주고 받는다.
+- com.eomcs.pms.ServerApp 변경
+  - ServerSocket 을 준비한다.
+
+### 2단계 - 클라이언트와 연결된 소켓을 통해 입출력을 수행한다.
+
+- com.eomcs.pms.ServerApp 변경
+  - accept()를 통해 리턴된 소켓 객체로부터 입출력 스트림을 얻는다.
+  - 클라이언트가 보낸 데이터를 그대로 반송한다.
 
 ## 실습 결과
-- src/main/java/com/eomcs/pms/ClientApp.java 변경
+- src/main/java/com/eomcs/pms/ServerApp.java 변경

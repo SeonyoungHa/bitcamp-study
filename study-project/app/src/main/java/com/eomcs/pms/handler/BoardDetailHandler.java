@@ -12,7 +12,7 @@ public class BoardDetailHandler extends AbstractBoardHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -33,7 +33,8 @@ public class BoardDetailHandler extends AbstractBoardHandler {
     System.out.println();
 
     Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || board.getWriter().getNo() != loginUser.getNo()) {
+    if (loginUser == null || 
+        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
       return;
     }
 
