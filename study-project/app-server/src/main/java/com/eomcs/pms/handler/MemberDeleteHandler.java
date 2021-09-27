@@ -13,7 +13,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[회원 삭제]");
-    int no = (int) request.getAttribute("no");
+    int no = Prompt.inputInt("번호? ");
 
     Member member = findByNo(no);
 
