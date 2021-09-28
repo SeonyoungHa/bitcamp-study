@@ -1,4 +1,4 @@
-package src.main.java.com.eomcs.pms.handler;
+package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.domain.Board;

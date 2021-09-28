@@ -32,6 +32,8 @@ public class ServerApp {
       System.out.println("===> " + command);
 
       if (command.equalsIgnoreCase("quit")) {
+        in.readLine();
+        out.println("success");
         out.println("goodbye");
         out.flush();
         break;
@@ -39,12 +41,17 @@ public class ServerApp {
       } else if (command.equals("/board/add")) {
         addBoard(out, in);
 
-      }else if (command.equals("/board/detail")) {
+      } else if (command.equals("/board/detail")) {
         detailBoard(out, in);
-      }
-      else {
+
+      } else {
+        System.out.println(11111);
+        in.readLine();
+        System.out.println(22222);
+        out.println("success");
         out.println(command);
         out.flush();
+        System.out.println(33333);
       }
     }
 
@@ -65,20 +72,21 @@ public class ServerApp {
     System.out.println(board);
 
     out.println("success");
+    out.println();
     out.flush();
   }
 
+  @SuppressWarnings("unchecked")
   private static void detailBoard(PrintWriter out, BufferedReader in) throws Exception {
     String jsonStr = in.readLine();
 
-    @SuppressWarnings("unchecked")
     HashMap<String,Object> map = new Gson().fromJson(jsonStr, HashMap.class);
     System.out.println(map);
 
     Board board = new Board();
     board.setNo(2);
-    board.setTitle("제목1");
-    board.setContent("내용1");
+    board.setTitle("제목1xx");
+    board.setContent("내용1xx");
     board.setRegisteredDate(Date.valueOf("2021-1-1"));
 
     Member m = new Member();
@@ -88,6 +96,7 @@ public class ServerApp {
 
     board.setWriter(m);
 
+    out.println("success");
     out.println(new Gson().toJson(board));
     out.flush();
   }

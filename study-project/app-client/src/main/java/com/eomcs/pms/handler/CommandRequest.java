@@ -1,4 +1,4 @@
-package src.main.java.com.eomcs.pms.handler;
+package com.eomcs.pms.handler;
 
 import java.util.HashMap;
 import java.util.Map;

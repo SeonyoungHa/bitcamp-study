@@ -1,44 +1,39 @@
 package com.eomcs.pms;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.sql.Date;
 import java.util.HashMap;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
-import com.google.gson.Gson;
 
 public class ClientApp {
+
+  static RequestAgent requestAgent;
 
   public static void main(String[] args) throws Exception {
     System.out.println("[PMS 클라이언트]");
 
-    System.out.println("1) 서버와 연결 중");
-    Socket socket = new Socket("127.0.0.1", 8888); // 서버와 접속이 이루어지면 리턴한다.
-
-    System.out.println("2) 서버와 연결되었음");
-
-    PrintWriter out = new PrintWriter(socket.getOutputStream());
-    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     while (true) {
       String input = Prompt.inputString("명령> ");
 
       if (input.equals("/board/add")) {
-        addBoard(out, in);
+        addBoard();
 
-      } else if (input.equals("/board/add")) {
-        detailBoard(out, in);
+      } else if (input.equals("/board/detail")) {
+        detailBoard();
 
       } else {
-        out.println(input);
-        out.flush();
+        requestAgent.request(input, null);
 
-        String result = in.readLine();  // 서버에서 한 줄의 문자열을 보낼 때까지 기다린다.
-        System.out.println(">>> " + result);
+        if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+          String result = requestAgent.getObject(String.class);
+          System.out.println(">>> " + result);
+        } else {
+          System.out.println("명령 요청 실패!");
+        }
       }
 
       if (input.equalsIgnoreCase("quit")) {
@@ -46,16 +41,12 @@ public class ClientApp {
       }
     }
 
-    System.out.println("3) 서버와의 접속을 끊음");
-    out.close();
-    socket.close();
+    requestAgent.close();
 
     Prompt.close();
   }
 
-  private static void addBoard(PrintWriter out, BufferedReader in) throws Exception {
-
-    out.println("/board/add");
+  private static void addBoard() throws Exception {
 
     Board board = new Board();
     board.setNo(1);
@@ -67,33 +58,36 @@ public class ClientApp {
     m.setNo(100);
     m.setName("aaa");
     m.setEmail("aaa@test.com");
-
     board.setWriter(m);
 
-    out.println(new Gson().toJson(board));
-    out.flush();
+    // 서버에 요청하고,
+    requestAgent.request("/board/add", board);
 
-    String result = in.readLine();
-    System.out.println("===>" + result);
+    // 서버가 보낸 결과를 확인한다.
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("게시글 저장 성공!");
+    } else {
+      System.out.println("게시글 저장 실패!");
+    }
   }
 
-  private static void detailBoard(PrintWriter out, BufferedReader in) throws Exception {
-    out.println("/board/detail");
+  private static void detailBoard() throws Exception {
 
     HashMap<String,Object> map = new HashMap<>();
     map.put("no", 100);
 
-    String jsonStr = new Gson().toJson(map);
-    System.out.println(jsonStr);
+    // 서버에 요청하고,
+    requestAgent.request("/board/detail", map);
 
-    out.println(jsonStr);
-    out.flush();
+    // 서버가 보낸 결과를 확인한다.
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      Board board = requestAgent.getObject(Board.class);
+      System.out.println(board);
 
-    System.out.println(in.readLine());
+    } else {
+      System.out.println("게시글 조회 실패!");
+    }
 
-    String result = in.readLine();
-    Board board = new Gson().fromJson(result, Board.class);
-    System.out.println(board);
   }
 
 }
