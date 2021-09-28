@@ -7,22 +7,29 @@ import com.google.gson.Gson;
 // - 클라이언트가 보낸 데이터를 특정 타입의 객체로 리턴하는 일을 한다.
 //
 public class Request {
-	String command;
-	String jsonData;
 
-	public Request(String command, String jsonData) {
-		this.command = command;
-		this.jsonData = jsonData;
-	}
+  String command;
+  String jsonData;
 
-	public String getCommand() {
-		return command;
-	}
+  public Request(String command, String jsonData) {
+    this.command = command;
+    this.jsonData = jsonData;
+  }
 
-	public <T> T getObject (Class<T> type) {
-		if (jsonData == null || jsonData.length() == 0) {
-			return null;
-		}
-		return new Gson().fromJson(this.jsonData, type);
-	}
+  public String getCommand() {
+    return command;
+  }
+
+  public <T> T getValue(Class<T> type) {
+    if (jsonData == null || jsonData.length() == 0) {
+      return null;
+    }
+    return new Gson().fromJson(jsonData, type);
+  }
 }
+
+
+
+
+
+
