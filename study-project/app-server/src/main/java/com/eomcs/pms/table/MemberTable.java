@@ -10,10 +10,8 @@ import com.eomcs.server.Response;
 // 
 public class MemberTable extends JsonDataTable<Member> implements DataProcessor {
 
-  String filename = "member.json";
-
   public MemberTable() {
-    super("member.json");
+    super("member.json", Member.class);
   }
 
   @Override
@@ -22,6 +20,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       case "member.insert": insert(request, response); break;
       case "member.selectList": selectList(request, response); break;
       case "member.selectOne": selectOne(request, response); break;
+      case "member.selectOneByEmailPassword": selectOneByEmailPassword(request, response); break;
       case "member.update": update(request, response); break;
       case "member.delete": delete(request, response); break;
       default:
@@ -48,6 +47,27 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     if (m != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(m);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+    }
+  }
+
+  private void selectOneByEmailPassword(Request request, Response response) throws Exception {
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
+
+    Member member = null;
+    for (Member m : list) {
+      if (m.getEmail().equals(email) && m.getPassword().equals(password)) {
+        member = m;
+        break;
+      }
+    }
+
+    if (member != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(member);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");

@@ -11,9 +11,8 @@ import com.eomcs.server.Response;
 // 
 public class BoardTable extends JsonDataTable<Board> implements DataProcessor {
 
-  String filename = "board.json";
   public BoardTable() {
-    super("board.json");
+    super("board.json", Board.class);
   }
 
   @Override
