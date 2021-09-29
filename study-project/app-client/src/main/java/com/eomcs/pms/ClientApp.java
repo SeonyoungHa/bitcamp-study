@@ -12,6 +12,10 @@ import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.MemberAddHandler;
+import com.eomcs.pms.handler.MemberDeleteHandler;
+import com.eomcs.pms.handler.MemberDetailHandler;
+import com.eomcs.pms.handler.MemberListHandler;
+import com.eomcs.pms.handler.MemberUpdateHandler;
 import com.eomcs.pms.listener.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -82,6 +86,10 @@ public class ClientApp {
 
     // Command 객체 준비
     commandMap.put("/member/add", new MemberAddHandler(requestAgent));
+    commandMap.put("/member/list", new MemberListHandler(requestAgent));
+    commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
+    commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
+    commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
   }
 
   Menu createMainMenu() {
@@ -144,14 +152,20 @@ public class ClientApp {
   }
 
 
-  void service() {
+  void service() throws Exception {
 
     notifyOnApplicationStarted();
 
     createMainMenu().execute();
+
+    // 프로그램의 실행을 끝내면, 서버와의 연결을 끊는다.
+    requestAgent.request("quit", null);
+    //    System.out.println(requestAgent.getObject(String.class));
+
     Prompt.close();
 
     notifyOnApplicationEnded();
+
   }
 
   public static void main(String[] args) throws Exception {
@@ -160,34 +174,6 @@ public class ClientApp {
     ClientApp app = new ClientApp(); 
     app.addApplicationContextListener(new AppInitListener());
     app.service();
-
-    //    
-    //    while (true) {
-    //      String input = Prompt.inputString("명령> ");
-    //
-    //      if (input.equals("/board/add")) {
-    //        addBoard();
-    //
-    //      } else if (input.equals("/board/detail")) {
-    //        detailBoard();
-    //
-    //      } else {
-    //        requestAgent.request(input, null);
-    //
-    //        if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-    //          String result = requestAgent.getObject(String.class);
-    //          System.out.println(">>> " + result);
-    //        } else {
-    //          System.out.println("명령 요청 실패!");
-    //        }
-    //      }
-    //
-    //      if (input.equalsIgnoreCase("quit")) {
-    //        break;
-    //      }
-    //    }
-    //
-    //    requestAgent.close();
 
     Prompt.close();
   }
