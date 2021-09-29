@@ -13,7 +13,7 @@ public class MemberDeleteHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 삭제]");
     int no = (int) request.getAttribute("no");
 
@@ -34,7 +34,6 @@ public class MemberDeleteHandler implements Command {
     }
 
     requestAgent.request("member.delete", params);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("회원 삭제 실패!");
       System.out.println(requestAgent.getObject(String.class));

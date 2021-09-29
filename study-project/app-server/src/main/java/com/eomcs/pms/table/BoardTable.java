@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 // 역할
-// - 게시판 데이터를 처리하는 일을 한다.
+// - 게시글 데이터를 처리하는 일을 한다.
 // 
 public class BoardTable {
 
@@ -85,9 +85,10 @@ public class BoardTable {
     switch (request.getCommand()) {
       case "board.insert": insert(request, response); break;
       case "board.selectList": selectList(request, response); break;
+      case "board.selectListByKeyword": selectListByKeyword(request, response); break;
       case "board.selectOne": selectOne(request, response); break;
       case "board.update": update(request, response); break;
-      case "board.delete": update(request, response); break;
+      case "board.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -103,6 +104,23 @@ public class BoardTable {
   private void selectList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
+  }
+
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("keyword");
+
+    ArrayList<Board> searchResult = new ArrayList<>();
+    for (Board board : list) {
+      if (!board.getTitle().contains(keyword) &&
+          !board.getContent().contains(keyword) &&
+          !board.getWriter().getName().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(board);
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
   }
 
   private void selectOne(Request request, Response response) throws Exception {

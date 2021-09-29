@@ -13,10 +13,11 @@ public class AuthLoginHandler implements Command {
   static int userAccessLevel = Menu.ACCESS_LOGOUT; // 기본은 로그아웃 된 상태이다.
 
   public static Member getLoginUser() {
-    Member member = new Member();
-    member.setNo(101);
-    member.setName("aaa");
-    member.setEmail("aaa@test.com");
+    loginUser = new Member();
+    loginUser.setNo(101);
+    loginUser.setName("aaa");
+    loginUser.setEmail("aaa@test.com");
+
     return loginUser;
   }
   public static int getUserAccessLevel() {

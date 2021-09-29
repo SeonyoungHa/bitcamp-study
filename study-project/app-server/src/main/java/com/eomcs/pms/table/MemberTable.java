@@ -87,7 +87,7 @@ public class MemberTable {
       case "member.selectList": selectList(request, response); break;
       case "member.selectOne": selectOne(request, response); break;
       case "member.update": update(request, response); break;
-      case "member.delete": update(request, response); break;
+      case "member.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

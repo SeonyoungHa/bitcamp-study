@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.util.HashMap;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
@@ -25,7 +24,7 @@ public class BoardDetailHandler implements Command {
     requestAgent.request("board.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
@@ -40,14 +39,12 @@ public class BoardDetailHandler implements Command {
     System.out.printf("조회수: %d\n", board.getViewCount());
     System.out.println();
 
-    Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || 
-        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
-      return;
-    }
+    //    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    //    if (loginUser == null || 
+    //        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
+    //      return;
+    //    }
 
-    // BoardUpdateHandler나 BoardDeleteHandler를 실행할 때 게시글 번호를 사용할 수 있도록 
-    // CommandRequest에 보관한다.
     request.setAttribute("no", no);
 
     while (true) {

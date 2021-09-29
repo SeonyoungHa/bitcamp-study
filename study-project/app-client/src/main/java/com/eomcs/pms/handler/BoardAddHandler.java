@@ -9,12 +9,12 @@ public class BoardAddHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public BoardAddHandler( RequestAgent RequestAgent) {
+  public BoardAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[새 게시글]");
 
     Board board = new Board();
@@ -27,14 +27,13 @@ public class BoardAddHandler implements Command {
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     requestAgent.request("board.insert", board);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글을 등록했습니다.");
-    } else {
       System.out.println("게시글 저장 실패!");
+      return;
     }
-  }
 
+    System.out.println("게시글을 저장했습니다.");
+  }
 }
 
 
