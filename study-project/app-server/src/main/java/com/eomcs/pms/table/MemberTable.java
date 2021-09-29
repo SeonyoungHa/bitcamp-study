@@ -129,23 +129,20 @@ public class MemberTable {
     }
 
     list.set(index, member);
-
     response.setStatus(Response.SUCCESS);
   }
 
-
   private void delete(Request request, Response response) throws Exception {
-    Member member = request.getObject(Member.class);
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
 
-    int index = indexOf(member.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, member);
-
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 
