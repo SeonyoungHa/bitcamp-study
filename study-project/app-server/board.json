@@ -1,1 +1,1 @@
-[{"no":7,"title":"oolala","content":"oolala","writer":{"no":101,"name":"aaa","email":"aaa@test.com"},"registeredDate":"9월 29, 2021","viewCount":0,"like":0}]
+[{"no":7,"title":"oolala","content":"oolala","writer":{"no":101,"name":"aaa","email":"aaa@test.com"},"registeredDate":"9월 29, 2021","viewCount":0,"like":0},{"no":1,"title":"aaa","content":"aaa","writer":{"no":1,"name":"aaa","email":"aaa@test.com","password":"1111","photo":"1","tel":"1","registeredDate":"9월 29, 2021"},"registeredDate":"10월 1, 2021","viewCount":0,"like":0}]
