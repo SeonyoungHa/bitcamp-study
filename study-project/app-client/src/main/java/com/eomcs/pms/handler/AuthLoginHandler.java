@@ -16,7 +16,6 @@ public class AuthLoginHandler implements Command {
   public static Member getLoginUser() {
     return loginUser;
   }
-
   public static int getUserAccessLevel() {
     return userAccessLevel;
   }
@@ -45,9 +44,9 @@ public class AuthLoginHandler implements Command {
     params.put("email", email);
     params.put("password", password);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);    
+    requestAgent.request("member.selectOneByEmailPassword", params);
 
-    if (requestAgent.getStatus().equals(requestAgent.SUCCESS)) {
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
@@ -57,7 +56,6 @@ public class AuthLoginHandler implements Command {
       System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
     }
   }
-
 }
 
 

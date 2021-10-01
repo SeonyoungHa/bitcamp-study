@@ -32,7 +32,6 @@ public abstract class JsonDataTable<T> {
     saveObjects();
   }
 
-  @SuppressWarnings("unchecked")
   private void loadObjects() {
 
     try (BufferedReader in = new BufferedReader(
