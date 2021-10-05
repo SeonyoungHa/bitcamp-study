@@ -14,25 +14,23 @@ import com.google.gson.Gson;
 // - 클라이언트와 통신하는 일을 담당한다.
 // - 클라이언트 요청이 들어오면 그 요청을 처리할 객체를 찾아 실행하는 일을 한다.
 // - 클라이언트 요청 정보를 객체에 보관하고, 응답 기능을 수행할 객체를 만드는 일을 한다.
-//
+// 
 public class RequestProcessor extends Thread {
   Socket socket;
-  BufferedReader in;
+  Map<String,DataProcessor> dataProcessorMap;
 
-  Map<String, DataProcessor> dataProcessorMap;
-
-  public RequestProcessor(Socket socket, Map<String, DataProcessor> dataProcessorMap) throws Exception {
+  public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
     this.socket = socket;
-    this.dataProcessorMap = dataProcessorMap;
+    this.dataProcessorMap = dataProcessorMap; 
   }
 
   @Override
   public void run() {
-    try (Socket socket = this.socket;) {
+    try (Socket socket = this.socket;
+        PrintWriter out = new PrintWriter(socket.getOutputStream());
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
 
       Set<String> dataProcessorNames = dataProcessorMap.keySet();
-      PrintWriter out = new PrintWriter(socket.getOutputStream());
-      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
       String command = in.readLine();
       Request request = new Request(command, in.readLine());
@@ -43,7 +41,7 @@ public class RequestProcessor extends Thread {
         response.setValue("goodbye");
         sendResult(response, out);
         return;
-      }
+      } 
 
       DataProcessor dataProcessor = null;
       for (String dataProcessorName : dataProcessorNames) {
@@ -72,12 +70,10 @@ public class RequestProcessor extends Thread {
     }
   }
 
-  private void saveData() {
-    // => 데이터를 파일에 저장한다.
+  private void saveData() throws Exception {
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
-        // 만약 데이터 처리 담당자가 JsonDataTable 의 자손이라면,
         ((JsonDataTable<?>)dataProcessor).save();
       }
     }
@@ -95,5 +91,9 @@ public class RequestProcessor extends Thread {
   }
 
 }
+
+
+
+
 
 
