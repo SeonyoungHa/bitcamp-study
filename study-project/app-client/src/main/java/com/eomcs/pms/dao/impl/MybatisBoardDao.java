@@ -18,17 +18,8 @@ public class MybatisBoardDao implements BoardDao {
 
   @Override
   public void insert(Board board) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "insert into pms_board(title,content,member_no) values(?,?,?)")) {
-    //
-    //      stmt.setString(1, board.getTitle());
-    //      stmt.setString(2, board.getContent());
-    //      stmt.setInt(3, board.getWriter().getNo());
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("게시글 데이터 입력 실패!");
-    //      }
-    //    }
+    sqlSession.insert("BoardMapper.insert", board);
+    sqlSession.commit();
   }
 
   @Override
@@ -38,44 +29,24 @@ public class MybatisBoardDao implements BoardDao {
 
   @Override
   public List<Board> findByKeyword(String keyword) throws Exception {
-    return null;
     return sqlSession.selectList("BoardMapper.findByKeyword", keyword);
   }
 
   @Override
   public Board findByNo(int no) throws Exception {
-    return null;
     return sqlSession.selectOne("BoardMapper.findByNo", no);
   }
 
   @Override
   public void update(Board board) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "update pms_board set"
-    //            + " title=?,content=?"
-    //            + " where board_no=?")) {
-    //
-    //      stmt.setString(1, board.getTitle());
-    //      stmt.setString(2, board.getContent());
-    //      stmt.setInt(3, board.getNo());
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("게시글 데이터 변경 실패!");
-    //      }
-    //    }
+    sqlSession.update("BoardMapper.update", board);
+    sqlSession.commit();
   }
 
   @Override
   public void delete(int no) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "delete from pms_board where board_no=?")) {
-    //
-    //      stmt.setInt(1, no);
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("게시글 데이터 삭제 실패!");
-    //      }
-    //    }
+    sqlSession.delete("BoardMapper.delete", no);
+    sqlSession.commit();
   }
 }
 
