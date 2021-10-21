@@ -34,21 +34,45 @@
     order by 
       b.board_no desc
   </select>
-<!--      
+  
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
+    select "
+      b.board_no,
+      b.title,
+      b.content,
+      b.created_dt,
+      b.view_cnt,
+      m.member_no,
+      m.name,
+      m.email
     from 
-      pms_member 
-    where 
-      member_no=#{no}
+      pms_board b
+    inner join pms_member m on b.member_no=m.member_no
+    where board_no=# {no}
   </select>
-
+  
+  
+    <select id="findByKeyword" resultMap="BoardMap" parameterType="string">
+    select
+      b.board_no,
+      b.title,
+      b.created_dt,
+      b.view_cnt,
+      m.member_no,
+      m.name,
+      m.email
+    from
+      pms_board b
+      inner join pms_member m on b.member_no=m.member_no
+    where
+      b.title like(concat('%',#{keyword},'%'))
+      or b.content like (concat('%',#{keyword},'%'))
+      or m.name like (concat('%',#{keyword},'%'))
+    order 
+      by b.board_no desc
+    </select>
+  
+<!--    
   <insert id="insert" parameterType="member">
     insert into pms_member(name,email,password,photo,tel) 
     values(#{name},#{email},password(#{password}),#{photo},#{tel})
