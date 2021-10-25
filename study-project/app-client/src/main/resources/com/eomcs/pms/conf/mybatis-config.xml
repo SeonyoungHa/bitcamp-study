@@ -23,8 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/eomcs/pms/mapper/MemberMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/BoardMapper.xml"/>
+    <package name="com/eomcs/pms/mapper.xml"/>
   </mappers>
 </configuration>
 
