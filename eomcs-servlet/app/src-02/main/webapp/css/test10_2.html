@@ -9,6 +9,8 @@
     => 다음 태그가 현재 태그의 자리를 차지할 것이다.
     => left 또는 right 정렬만 가능하다.
     => float일 때 유의할 점
+    => 원래 출력 되어야 하는 공간에서 둥둥 띄운 다음에 오른쪽 혹은 왼쪽에 붙이는게 float
+       자식 태그 중 공중 부양 된 태그가 있으면 부모 태그 적용 안됨
       1) width와 height를 지정하지 않으면, inline 처럼 콘텐츠의 크기에 따라
           너비, 높이가 결정된다.
       2) margin이 서로 겹치지 않고 그대로 유지한다.
@@ -35,9 +37,12 @@
   #d11 {background-color: orange;}
   #d2 {
     background-color: green;
-    float: right;
+    float: left;
+    xmargin-top: 0px;
   }
-  #d3 {background-color: blue;}
+  #d3 {
+    background-color: blue;
+    xmargin-left: 55px;}
   </style>
 </head>
 <body>
