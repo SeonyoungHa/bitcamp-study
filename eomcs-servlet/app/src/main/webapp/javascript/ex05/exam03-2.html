@@ -20,6 +20,8 @@
 <script>
 "use strict"
 
+alert("잠깐!");
+
 // 태그에 임의의 속성을 추가할 수 있다.
 // 
 var e = document.querySelector("article:nth-child(2) a");
@@ -39,7 +41,7 @@ console.log(e["data-no"]);
 // 디버깅을 쉽게 하려면 다음 방식을 사용하라!
 
 // 2) 방법2
-e.setAttribute("data-no2", 300);
+e.setAttribute("data-no2", 300); // 원래 없던 속성을 추가할 때 사용하는 방법
 console.log(e.getAttribute("data-no2"));
 
 
