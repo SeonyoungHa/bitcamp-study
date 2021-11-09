@@ -19,7 +19,7 @@ import javax.servlet.ServletContextListener;
 //    - 기타 다양한 인터페이스가 있다. 문서를 참고하라.
 //
 // 리스너 배포하기
-// => DD 파일(web.xml)에 설정하거나
+// => DD 파일(web.xml)에 설정하기
 //    @WebListener 애노테이션으로 설정하면 된다.
 //
 // 리스너의 용도
@@ -35,17 +35,20 @@ import javax.servlet.ServletContextListener;
 //@WebListener
 public class Listener01 implements ServletContextListener {
 
-  @Override
-  public void contextInitialized(ServletContextEvent sce) {
-    // 웹 애플리케이션이 시작될 때 호출된다.
-    System.out.println("Listener01.contextInitialized()");
-  }
+	public Listener01() {
+		System.out.println("Listener01() 호출됨!");
+	}
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		// 웹 애플리케이션이 시작될 때 호출된다.
+		System.out.println("Listener01.contextInitialized()");
+	}
 
-  @Override
-  public void contextDestroyed(ServletContextEvent sce) {
-    // 웹 애플리케이션이 종료될 때 호출된다.
-    System.out.println("Listener01.contextDestroyed()");
-  }
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		// 웹 애플리케이션이 종료될 때 호출된다.
+		System.out.println("Listener01.contextDestroyed()");
+	}
 }
 
 

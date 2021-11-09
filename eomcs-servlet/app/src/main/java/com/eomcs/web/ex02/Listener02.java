@@ -28,23 +28,27 @@ import javax.servlet.http.HttpServletRequest;
 //    - 요청이 들어 올 때 로그 남기기
 //
 //
-//@WebListener
+//@WebListener 
 public class Listener02 implements ServletRequestListener {
 
-  @Override
-  public void requestInitialized(ServletRequestEvent sre) {
-    // 요청이 들어 왔을 때 호출된다.
-    System.out.println("Listener02.requestInitialized()");
-    HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
-    System.out.println("클라이언트 IP: " + request.getRemoteAddr());
-    System.out.println("요청 URL: " + request.getServletPath());
-  }
+	public Listener02() {
+		System.out.println("Listener02() 호출됨!");
+	}
 
-  @Override
-  public void requestDestroyed(ServletRequestEvent sre) {
-    // 요청 처리를 완료할 때 호출된다.
-    System.out.println("Listener02.requestDestroyed()");
-  }
+	@Override
+	public void requestInitialized(ServletRequestEvent sre) {
+		// 요청이 들어 왔을 때 호출된다.
+		System.out.println("Listener02.requestInitialized()");
+		HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
+		System.out.println("클라이언트 IP: " + request.getRemoteAddr());
+		System.out.println("요청 URL: " + request.getServletPath());
+	}
+
+	@Override
+	public void requestDestroyed(ServletRequestEvent sre) {
+		// 요청 처리를 완료할 때 호출된다.
+		System.out.println("Listener02.requestDestroyed()");
+	}
 }
 
 

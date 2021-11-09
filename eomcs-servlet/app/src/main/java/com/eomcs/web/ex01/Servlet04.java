@@ -1,7 +1,8 @@
-// 서블릿 만들기 - @WebServlet 애노테이션
+// 서블릿 만들기 - doGet(), doPost() 등
 package com.eomcs.web.ex01;
 
 import java.io.IOException;
+
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -23,13 +24,21 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(urlPatterns={"/ex01/s04","/ex01/hoho","/hoho2"})
 public class Servlet04 extends GenericServlet {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Override
-  public void service(ServletRequest req, ServletResponse res)
-      throws ServletException, IOException {
-    System.out.println("Servlet04.service(ServletRequest,ServletResponse)");
-  }
+	// Servlet 인터페이스의 service()를 오버라이딩 하는 대신에
+	// HttpServlet 클래스가 추가한 service()를 오버라이딩 하라.
+	// 호출과정:
+	// => 웹브라우저
+	//   => 톰캣 서버
+	//     => Servlet03.service(ServletRequest, ServletResponse) 
+	//       => Serlvet03.service(HttpServletRequest, HttpServletResponse)
+	//         => Servlet03.doGet(HttpServletRequest, HttpServletResponse)
+	@Override
+	protected void doGet(ServletRequest req, ServletResponse res)
+			throws ServletException, IOException {
+		System.out.println("Servlet04.service(ServletRequest,ServletResponse)");
+	}
 }
 
 
