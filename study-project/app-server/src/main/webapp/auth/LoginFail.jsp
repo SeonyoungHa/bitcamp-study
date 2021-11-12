@@ -1,25 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<h1>회원 등록 결과</h1>
-<p>회원을 등록했습니다.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h1>로그인 실패!</h1>
+<p>이메일 또는 암호가 일치하지 않습니다!</p>
 
 
 

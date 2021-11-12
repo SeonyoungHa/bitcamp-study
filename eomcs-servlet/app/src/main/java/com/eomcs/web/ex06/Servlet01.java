@@ -2,6 +2,7 @@
 package com.eomcs.web.ex06;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,21 +17,21 @@ import javax.servlet.http.HttpServletResponse;
 //    웹 애플리케이션을 시작시킬 때 미리 서블릿 객체를 준비한다.
 //    예) DB 연결, 소켓 연결, 필요한 환경 변수 로딩, 스프링 IoC 컨테이너 준비 등
 //
-//@WebServlet(value = "/ex06/s1", loadOnStartup = 1)
+//@WebServlet(value ="/ex06/s1", loadOnStartup=1)
 @SuppressWarnings("serial")
 public class Servlet01 extends HttpServlet {
 
-  @Override
-  public void init() throws ServletException {
-    // 클라이언트가 서블릿의 실행을 요청할 때 서블릿 객체가 없으면 생성된다.
-    // 서블릿 객체가 생성될 때 이 메서드가 호출된다.
-    System.out.println("/ex06/s1 => init()");
-  }
+	@Override
+	public void init() throws ServletException {
+		// 클라이언트가 서블릿의 실행을 요청할 때 서블릿 객체가 없으면 생성된다.
+		// 서블릿 객체가 생성될 때 이 메서드가 호출된다.
+		System.out.println("/ex06/s1 => init()");
+	}
 
-  @Override
-  protected void service(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    System.out.println("/ex06/s1 => service()");
-  }
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		System.out.println("/ex06/s1 => service()");
+	}
 }
 
