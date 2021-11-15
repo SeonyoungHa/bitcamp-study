@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.service.ProjectService;
 
 @RequestMapping("/project/delete")
-public class ProjectDeleteController implements Controller {
+public class ProjectDeleteController implements PageController {
 
   ProjectService projectService;
 

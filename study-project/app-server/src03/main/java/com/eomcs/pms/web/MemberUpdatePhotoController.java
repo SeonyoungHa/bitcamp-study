@@ -14,11 +14,12 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-public class MemberAddController implements Controller {
+@RequestMapping("/member/updatePhoto")
+public class MemberUpdatePhotoController implements PageController {
 
 	MemberService memberService;
 
-	public MemberAddController(MemberService memberService) {
+	public MemberUpdatePhotoController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 
@@ -26,24 +27,26 @@ public class MemberAddController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Member member = new Member();
-		member.setName(request.getParameter("name"));
-		member.setEmail(request.getParameter("email"));
-		member.setPassword(request.getParameter("password"));
-		member.setTel(request.getParameter("tel"));
+		member.setNo(Integer.parseInt(request.getParameter("no")));
 
+		// 회원 사진 파일 저장
 		Part photoPart = request.getPart("photo");
+		if (photoPart.getSize() > 0) {
+			String filename = UUID.randomUUID().toString();
+			String saveFilePath = request.getServletContext().getRealPath("/upload/" + filename);
+			photoPart.write(saveFilePath);
+			member.setPhoto(filename);
 
-		String filename = UUID.randomUUID().toString();
-		String saveFilePath = request.getServletContext().getRealPath("/upload/" + filename);
+			// 회원 사진의 썸네일 이미지 파일 생성하기
+			generatePhotoThumbnail(saveFilePath);
+		}
 
-		photoPart.write(saveFilePath);
+		if (member.getPhoto() == null) {
+			throw new Exception("사진을 선택하지 않았습니다.");
+		}
 
-		member.setPhoto(filename);
-
-		generatePhotoThumbnail(saveFilePath);
-
-		memberService.add(member);
-		return "redirect:list";
+		memberService.update(member);
+		return "redirect:detail?no=" + member.getNo();
 	}
 
 	private void generatePhotoThumbnail(String saveFilePath) {

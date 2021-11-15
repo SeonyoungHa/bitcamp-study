@@ -7,7 +7,7 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 
 @RequestMapping("/project/form")
-public class ProjectAddFormController implements Controller {
+public class ProjectAddFormController implements PageController {
 
   MemberService memberService;
 

@@ -7,8 +7,9 @@ import javax.servlet.http.HttpSession;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 
+@Controller
 @RequestMapping("/auth/login")
-public class LoginController implements Controller {
+public class LoginController {
 
   MemberService memberService;
 
@@ -16,8 +17,8 @@ public class LoginController implements Controller {
     this.memberService = memberService;
   }
 
-  @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @RequestMapping
+  public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
     response.setContentType("text/html;charset=UTF-8");
 
     if (request.getMethod().equals("GET")) {
@@ -37,8 +38,6 @@ public class LoginController implements Controller {
       request.setAttribute("email", email);
       return "/auth/form.jsp";
     }
-
-    HttpSession session = request.getSession();
 
     String email = request.getParameter("email");
     String password = request.getParameter("password");

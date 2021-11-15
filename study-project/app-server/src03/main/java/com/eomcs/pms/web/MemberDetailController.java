@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 
-public class MemberDetailController implements Controller {
+@Controller
+@RequestMapping("/member/detail")
+public class MemberDetailController {
 
 	MemberService memberService;
 
@@ -14,8 +16,8 @@ public class MemberDetailController implements Controller {
 		this.memberService = memberService;
 	}
 
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping
+	public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		response.setContentType("text/html;charset=UTF-8");
 		int no = Integer.parseInt(request.getParameter("no"));

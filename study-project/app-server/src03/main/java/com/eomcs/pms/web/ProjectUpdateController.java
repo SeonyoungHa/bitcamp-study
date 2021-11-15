@@ -10,7 +10,7 @@ import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.service.ProjectService;
 
 @RequestMapping("/project/update")
-public class ProjectUpdateController implements Controller {
+public class ProjectUpdateController implements PageController {
 
   ProjectService projectService;
 

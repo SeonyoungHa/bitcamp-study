@@ -5,12 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.eomcs.pms.domain.Member;
 
+@Controller
 @RequestMapping("/auth/logout")
-public class LogoutController implements Controller {
+public class LogoutController {
 
-  @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    HttpSession session = request.getSession();
+  @RequestMapping
+  public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser != null) {

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("/auth/loginUser")
-public class LoginUserController implements Controller {
+public class LoginUserController implements PageController {
 
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

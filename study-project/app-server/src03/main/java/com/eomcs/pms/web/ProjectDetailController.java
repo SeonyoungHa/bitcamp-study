@@ -8,7 +8,7 @@ import com.eomcs.pms.service.ProjectService;
 import com.eomcs.pms.service.TaskService;
 
 @RequestMapping("/project/detail")
-public class ProjectDetailController implements Controller {
+public class ProjectDetailController implements PageController {
 
   ProjectService projectService;
   MemberService memberService;

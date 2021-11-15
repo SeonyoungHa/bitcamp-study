@@ -8,7 +8,7 @@ import com.eomcs.pms.domain.Task;
 import com.eomcs.pms.service.TaskService;
 
 @RequestMapping("/task/update")
-public class TaskUpdateController implements Controller {
+public class TaskUpdateController implements PageController {
 
   TaskService taskService;
 

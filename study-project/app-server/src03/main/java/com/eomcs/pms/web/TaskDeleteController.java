@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.service.TaskService;
 
 @RequestMapping("/task/delete")
-public class TaskDeleteController implements Controller {
+public class TaskDeleteController implements PageController {
 
   TaskService taskService;
 

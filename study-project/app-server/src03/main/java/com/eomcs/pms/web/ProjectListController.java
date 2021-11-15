@@ -8,7 +8,7 @@ import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.service.ProjectService;
 
 @RequestMapping("/project/list")
-public class ProjectListController implements Controller {
+public class ProjectListController implements PageController {
 
   ProjectService projectService;
 

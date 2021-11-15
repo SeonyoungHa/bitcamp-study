@@ -10,7 +10,7 @@ import com.eomcs.pms.service.ProjectService;
 import com.eomcs.pms.service.TaskService;
 
 @RequestMapping("/task/add")
-public class TaskAddController implements Controller {
+public class TaskAddController implements PageController {
 
   ProjectService projectService;
   TaskService taskService;

@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 
-public class MemberUpdateController implements Controller {
+@RequestMapping("/member/update")
+public class MemberUpdateController implements PageController {
 
 	MemberService memberService;
 

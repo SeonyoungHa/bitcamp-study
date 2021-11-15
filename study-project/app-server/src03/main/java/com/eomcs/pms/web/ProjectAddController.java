@@ -11,7 +11,7 @@ import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.service.ProjectService;
 
 @RequestMapping("/project/add")
-public class ProjectAddController implements Controller {
+public class ProjectAddController implements PageController {
 
   ProjectService projectService;
 
