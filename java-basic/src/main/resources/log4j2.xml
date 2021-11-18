@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration status="INFO">
   <Appenders>
-    <Console name="STDOUT">
-        <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd} [%t] %c{1} - %msg%n" />
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="[%-5level] %d{yyyy-MM-dd} [%t] %c{1} - %msg%n" />
     </Console>
   </Appenders>
   <Loggers>
-    <Root level="debug">
+    <Root level="TRACE">
       <AppenderRef ref="STDOUT" />
     </Root>
   </Loggers>
