@@ -7,14 +7,18 @@
   metadata-complete="false">
  
 <!-- 리스너 등록 -->
+<!-- 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener> 
+ -->
 <!-- ContextLoaderListener의 IoC 컨테이너 -->
+<!-- 
     <context-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/app-context.xml</param-value>
+      <param-value>/WEB-INF/app-servlet.xml</param-value>
     </context-param>
+ -->
     
 <!-- 프론트 컨트롤러 등록-->
   <servlet>
