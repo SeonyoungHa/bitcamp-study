@@ -42,9 +42,8 @@
             BeanPostProcessor(객체 생성 후 처리기) 인 것이다.
     -->
     
-  <!-- 
+
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-   -->
 
     
     <bean id="c1" class="com.eomcs.spring.ioc.ex08.b.Car">

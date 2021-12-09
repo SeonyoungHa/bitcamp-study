@@ -23,10 +23,22 @@ public class Exam0130 {
 
       @Override
       public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return super.equals(obj);
+        if (this == obj)
+          return true;
+        if (obj == null)
+          return false;
+        if (getClass() != obj.getClass())
+          return false;
+        MyKey other = (MyKey) obj;
+        if (major == null) {
+          if (other.major != null)
+            return false;
+        } else if (!major.equals(other.major))
+          return false;
+        if (no != other.no)
+          return false;
+        return true;
       }
-
     }
 
     MyKey k1 = new MyKey("컴공", 1);
@@ -60,9 +72,7 @@ public class Exam0130 {
     System.out.printf("hashCode(): %d, %d\n", k3.hashCode(), k6.hashCode());
     System.out.println("-----------------------------------");
 
-    // equals()의 리턴 값이 true 이더라도
-    // hashCode()의 리턴 값이 다르면
-    // 다른 key로 간주한다.
+    // equals()의 리턴 값이 true라고 해서 같은 key로 간주하지 않는다.
     System.out.println(map.get(k6));
   }
 

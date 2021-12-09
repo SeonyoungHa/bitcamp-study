@@ -6,13 +6,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Exam01 {
 
-	public static void main(String[] args) {
-		ApplicationContext iocContainer = new ClassPathXmlApplicationContext(//
-				"com/eomcs/spring/ioc/ex06/d/application-context.xml");
+  public static void main(String[] args) {
+    ApplicationContext iocContainer = new ClassPathXmlApplicationContext(//
+        "com/eomcs/spring/ioc/ex06/d/application-context.xml");
 
-		System.out.println(iocContainer.getBean("c1").getClass().getName());
-		System.out.println(iocContainer.getBean("c1"));
-	}
+    System.out.println(iocContainer.getBean("c1"));
+  }
 
 }
 

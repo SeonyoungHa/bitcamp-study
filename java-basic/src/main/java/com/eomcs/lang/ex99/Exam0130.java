@@ -13,8 +13,7 @@ public class Exam0130 {
     // 날짜 및 시간 옵션
     // Y : 날짜 및 시각 데이터에서 년도를 추출하여 4자리로 표현한다.
     // y : 날짜 및 시각 데이터에서 년도를 추출하여 뒤의 2자리로 표현한다.
-    System.out.printf("%1$tY, %1$ty\n", today);
-    //System.out.printf("%tY, %1$ty\n", today);
+    System.out.printf("%tY, %1$ty\n", today);
 
     // B : 날짜 및 시각 데이터에서 월을 추출하여 전체 이름으로 표현한다. ex) January
     // b : 날짜 및 시각 데이터에서 월을 추출하여 단축 이름으로 표현한다. ex) Jan
@@ -44,8 +43,8 @@ public class Exam0130 {
     System.out.printf("%1$tS %1$tL %1$tN\n", today);
 
     // p : 오전 오후 출력하기
-    //     소문자 t를 사용하면 am 또는 pm으로 출력하고, 
-    //     대문자 T를 사용하면 AM 또는 PM으로 출력한다.
+    //     소문자 p를 사용하면 am 또는 pm으로 출력하고, 
+    //     대문자 P를 사용하면 AM 또는 PM으로 출력한다.
     //     한글은 대소문자가 없기 때문에 의미없다.
     System.out.printf("%1$tp\n", today);
 

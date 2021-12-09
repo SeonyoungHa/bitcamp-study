@@ -11,7 +11,6 @@ public class Exam0420 {
 
     // FileReader 객체가 읽을 데이터를 저장할 메모리를 준비한다.
     CharBuffer charBuf = CharBuffer.allocate(100);
-    // 최대 100자리를 읽을 수 있음.
 
     // 읽은 데이터를 CharBuffer 에 저장한다.
     int count = in.read(charBuf);

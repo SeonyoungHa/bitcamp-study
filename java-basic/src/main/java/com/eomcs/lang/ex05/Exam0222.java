@@ -10,7 +10,6 @@ public class Exam0222 {
     System.out.println(f1);
     System.out.println(f2);
     System.out.println(f1 + f2);
-
     // 12.321
     // => 12: 1100
     // => 0.321: 01010010001011010001
@@ -71,7 +70,8 @@ public class Exam0222 {
     //    1.10101101011110001101010
     //
     // => 0 10000010 10101101011110001101010
-    //               
+    //       
+
 
 
   }

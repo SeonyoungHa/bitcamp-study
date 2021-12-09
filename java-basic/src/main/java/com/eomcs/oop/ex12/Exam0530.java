@@ -47,11 +47,6 @@ public class Exam0530 {
   }
 
   public static void main(String[] args) {
-    //    int i = 100;
-    //    double d = i;
-    //    float f = i;
-    //    int i2 = i;
-    //    short s = i; //불가능
 
     // 리턴 타입 int ===> double
     Calculator1 c1 = MyCalculator::plus; // OK!
